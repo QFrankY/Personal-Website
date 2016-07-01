@@ -1,0 +1,77 @@
+doctype html
+html(lang='en')
+	head
+		title Welcome!
+		link(href='lib/angular-material/angular-material.min.css',
+			rel='stylesheet')
+		link(href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic",
+			rel='stylesheet')
+		link(href='https://fonts.googleapis.com/icon?family=Material+Icons',
+			rel='stylesheet')
+		link(href='css/styles.css',
+			rel='stylesheet')
+	body(ng-controller='MainCtrl', layout='row', ng-cloak)
+		//- Sidebar
+		md-sidenav.md-sidenav-left.md-whiteframe-z2#sidebar(layout='column',
+			md-component-id='left',
+			md-is-locked-open="$mdMedia('gt-md')")
+			md-toolbar.md-tall.md-hue-2.md-whiteframe-z1
+				#sitehead
+					.md-title
+						| Frank Yu
+					.md-subhead
+						| Personal Website
+			md-list.md-dense(flex)
+				md-list-item(ng-repeat='item in sideBar.menu')
+					md-button(flex, href='{{item.link}}')
+						md-item-content(md-ink-ripple, layout='row', layout-align='start center')
+							.inset
+								md-icon(md-font-library='material-icons')
+									| {{item.icon}}
+							.inset
+								| {{item.title}}
+				md-subheader Projects
+				md-list-item(ng-repeat='item in sideBar.projects')
+					md-button(flex)
+						md-item-content(md-ink-ripple, layout='row', layout-align='start center')
+							.inset
+								md-icon(md-font-library='material-icons')
+									| {{item.icon}}
+							.inset
+								| {{item.title}}
+				md-subheader Additional Links
+				md-list-item(ng-repeat='item in sideBar.additional')
+					md-button(flex, href='{{item.link}}', target='_blank')
+						md-item-content(md-ink-ripple, layout='row', layout-align='start center')
+							.inset
+								md-icon(md-font-library='material-icons')
+									| {{item.icon}}
+							.inset
+								| {{item.title}}
+		
+		//- Main Page
+		div.relative(layout='column',
+			layout-fill roll='main')
+			
+			//- Toolbar
+			md-toolbar.md-hue-1#banner(layout='row',
+				md-whiteframe='1')
+				.md-toolbar-tools
+					md-button.md-icon-button.md-ink-ripple(ng-click="openLeftMenu()",
+						hide-gt-md,
+						aria-label='Menu')
+						md-icon(md-font-library='material-icons')
+							| menu
+					h3.md-headline Home
+			
+			//- Main content
+			md-content
+
+		//- Loading JS files
+		script(data-main='config.js', src='lib/require.js')
+		script.
+			/** Loading Application */
+			require([
+				'./app'
+			], function (MainApp) {
+			});

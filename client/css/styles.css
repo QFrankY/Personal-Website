@@ -1,0 +1,16 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+
+#banner {
+	padding: 0 8px;
+}
+
+#sidebar md-list-item .md-button {
+	margin: 0 !important;
+}
+
+#sitehead {
+	margin: 20px;
+	margin-top: 60px;
+}
