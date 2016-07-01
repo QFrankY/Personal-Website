@@ -71,7 +71,7 @@ require([
 					icon  : 'code'
 				},
 				{
-					link  : '',
+					link  : 'http://frank-yu.com/old/',
 					title : 'Old Website',
 					icon  : 'web'
 				}
