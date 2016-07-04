@@ -2,13 +2,13 @@ doctype html
 html(lang='en')
 	head
 		title Welcome!
-		link(href='lib/angular-material/angular-material.min.css',
+		link(href='resources/lib/angular-material/angular-material.min.css',
 			rel='stylesheet')
 		link(href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic",
 			rel='stylesheet')
 		link(href='https://fonts.googleapis.com/icon?family=Material+Icons',
 			rel='stylesheet')
-		link(href='css/styles.css',
+		link(href='resources/styles.css',
 			rel='stylesheet')
 	body(ng-controller='MainCtrl', layout='row', ng-cloak)
 		//- Sidebar
@@ -54,7 +54,7 @@ html(lang='en')
 			layout-fill roll='main')
 			
 			//- Toolbar
-			md-toolbar.md-hue-1#banner(layout='row',
+			md-toolbar#banner(layout='row',
 				md-whiteframe='1')
 				.md-toolbar-tools
 					md-button.md-icon-button.md-ink-ripple(ng-click="openLeftMenu()",
@@ -65,10 +65,13 @@ html(lang='en')
 					h3.md-headline Home
 			
 			//- Main content
-			md-content
+			md-content.md-hue-1
+				div.inset
+				div(flex-gt-sm='90', flex-gt-md='80')
+					| Hello
 
 		//- Loading JS files
-		script(data-main='config.js', src='lib/require.js')
+		script(data-main='config.js', src='resources/lib/require.js')
 		script.
 			/** Loading Application */
 			require([

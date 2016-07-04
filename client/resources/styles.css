@@ -2,6 +2,10 @@
 	display: none !important;
 }
 
+body,html {
+	background:#eeeeee;
+}
+
 #banner {
 	padding: 0 8px;
 }

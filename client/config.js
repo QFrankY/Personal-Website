@@ -3,19 +3,18 @@
  */
 
 require.config({
-
 	/** Dependency Shortcuts */
 	paths: {
 		/** Angular */
-		'angular'          : '/lib/angular/angular.min',
-		'angular-resource' : '/lib/angular-resource/angular-resource.min',
-		'angular-route'    : '/lib/angular-route/angular-route.min',
+		'angular'          : '/resources/lib/angular/angular.min',
+		'angular-resource' : '/resources/lib/angular-resource/angular-resource.min',
+		'angular-route'    : '/resources/lib/angular-route/angular-route.min',
 
 		/** Angular Material */
-		'angular-aria'     : '/lib/angular-aria/angular-aria.min',
-		'angular-animate'  : '/lib/angular-animate/angular-animate.min',
-		'angular-messages' : '/lib/angular-messages/angular-messages.min',
-		'angular-material' : '/lib/angular-material/angular-material.min'
+		'angular-aria'     : '/resources/lib/angular-aria/angular-aria.min',
+		'angular-animate'  : '/resources/lib/angular-animate/angular-animate.min',
+		'angular-messages' : '/resources/lib/angular-messages/angular-messages.min',
+		'angular-material' : '/resources/lib/angular-material/angular-material.min'
 	},
 
 	shim: {
@@ -44,7 +43,7 @@ require.config({
 		},
 
 		'angular-material': {
-			deps: ['angular','angular-messages', 'angular-aria', 'angular-animate']
+			deps: ['angular-messages', 'angular-aria', 'angular-animate']
 		}
 	}
 });
