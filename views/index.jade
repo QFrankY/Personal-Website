@@ -32,7 +32,7 @@ html(lang='en')
 								| {{item.title}}
 				md-subheader Projects
 				md-list-item(ng-repeat='item in sideBar.projects')
-					md-button(flex)
+					md-button(flex, href='{{item.link}}')
 						md-item-content(md-ink-ripple, layout='row', layout-align='start center')
 							.inset
 								md-icon(md-font-library='material-icons')
@@ -65,10 +65,7 @@ html(lang='en')
 					h3.md-headline Home
 			
 			//- Main content
-			md-content.md-hue-1
-				div.inset
-				div(flex-gt-sm='90', flex-gt-md='80')
-					| Hello
+			md-content.md-hue-1(ng-view)
 
 		//- Loading JS files
 		script(data-main='config.js', src='resources/lib/require.js')
