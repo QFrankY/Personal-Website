@@ -7,8 +7,9 @@ define([
 	'use strict';
 
 	return [
-		function () {
-
+		'$scope',
+		function ($scope) {
+			
 		}
 	];
 });

@@ -18,5 +18,5 @@
 coverage
 node_modules
 npm-debug.log
-client/resources/lib
+public/resources/lib
 bower_components/

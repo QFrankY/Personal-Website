@@ -15,27 +15,30 @@ define([
 		'$scope',
 		'$mdSidenav',
 		function ($scope, $mdSidenav) {
-			$scope.openLeftMenu = function() {
+			$scope.siteBannerTitle = 'Home';
+
+			$scope.toggleLeftMenu = function() {
 				$mdSidenav('left').toggle();
 			};
 
 			$scope.sideBar = {
 				menu : [
 					{
-						link  : '/',
+						link  : '',
 						title : 'Home',
 						icon  : 'home'
 					},
 					{
-						link  : '',
+						link  : '/home/portfolio',
 						title : 'Portfolio',
-						icon  : 'dashboard'
+						icon  : 'dashboard',
+						hide  : true
 					}
 				],
 
 				projects : [
 					{
-						link  : '/chatter',
+						link  : '/project/chatter',
 						title : 'Chatter',
 						icon  : 'messages'
 					}
@@ -53,6 +56,11 @@ define([
 						icon  : 'web'
 					}
 				]
+			};
+
+			$scope.changeSiteTitle = function (newTitle) {
+				$scope.siteBannerTitle = newTitle;
+				$scope.toggleLeftMenu();
 			};
 		}
 	]

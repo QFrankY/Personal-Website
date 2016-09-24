@@ -32,13 +32,20 @@ require([
 				'100': '#eeeeee'
 			});
 
+			var customBlue = $mdThemingProvider.extendPalette('light-blue', {
+				'50': '#ffffff',
+			});
+
 			$mdThemingProvider.definePalette('customGrey', customGrey);
 
+			$mdThemingProvider.definePalette('customBlue', customBlue);
+
 			$mdThemingProvider.theme('default')
-				.primaryPalette('light-blue', {
+				.primaryPalette('customBlue', {
 					'default' : '600',
-					'hue-2'   : '800',
-					'hue-1'   : '100'
+					'hue-3'   : '800',
+					'hue-2'   : '100',
+					'hue-1'		: '50'
 				})
 				.accentPalette('pink')
 				.warnPalette('red')
@@ -48,10 +55,10 @@ require([
 				})
 
 			$routeProvider.when('/home', {
-				templateUrl : 'home/template.html',
+				templateUrl : '/template/home',
 				controller  : 'HomeCtrl'
-			}).when('/chatter', {
-				templateUrl : 'chatter/template.html',
+			}).when('/project/chatter', {
+				templateUrl : '/template/chatter',
 				controller  : 'ChatterCtrl'
 			}).otherwise({
 				redirectTo: '/home'
