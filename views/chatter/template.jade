@@ -1,1 +1,72 @@
-h1 hello
+div(md-theme='chatter', layout='row', md-theme-watch, flex)
+	//- Sidebar
+	md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(layout='column',
+		md-component-id='chatterSide',
+		md-is-locked-open='true')
+		md-list(layout='column')
+			md-list-item.md-2-line(ng-if='user')
+				img.md-avatar(ng-src='{{getUserImageUrl(user.imageNum)}}', alt='{{user.name}}')
+				.md-list-item-text
+					h3 {{user.name}}
+			md-list-item(md-colors="::{backgroundColor: 'primary-700'}")
+				p Rooms
+				md-button.md-secondary(ng-click='rooms.create()')
+					| Add
+			md-list-item(layout-margin, ng-if='!rooms.allLoaded')
+				md-progress-circular
+			md-list-item.md-2-line(ng-if='rooms.allLoaded',
+				ng-repeat='room in rooms.all',
+				ng-click='rooms.join(room.name, false)')
+				.md-list-item-text
+					h3 {{room.name}}
+					p {{room.numConnections}} connected
+
+	//- Main content
+	md-content(layout='column', flex)
+		md-card(md-colors="::{backgroundColor: 'primary-700'}",
+			ng-if='rooms.joined.length == 0 && welcomeMsgOpen')
+			md-card-title
+				md-card-title-text
+					span.md-headline Welcome to Chatter
+			md-card-content
+				p
+					| Click on a chat room on the left to join or create your own.
+			md-card-actions(layout="row" layout-align="end center")
+				md-button.md-icon-button(ng-click='closeWelcomeMsg()')
+					md-icon(md-font-library='material-icons')
+						| close
+
+		div(ng-if='rooms.joined.length > 0', layout='column', flex)
+			md-tabs(md-primary, md-border-bottom, flex)
+				md-tab(ng-repeat='tab in rooms.joined')
+					md-tab-label
+						span(md-colors="{color:'default-primary-50'}")
+							| {{ tab.name }}
+					md-tab-body
+						md-list(flex)
+							md-list-item.md-2-line.md-long-text.no-margin
+								img.md-avatar(ng-src='{{item.face}}?{{$index}}', alt='{{item.who}}')
+								.md-list-item-text(layout='column')
+									h3 Hello
+									p sdfasdfasdf sadf
+						md-button.md-fab.md-fab-bottom-right(aria-label='Menu', ng-click='rooms.create()')
+							md-icon(md-font-library='material-icons')
+								| menu
+			md-card
+				md-card-content(layout='row')
+					form(name='messenger', layout='column', flex)
+						md-input-container
+							label Message
+							input(ng-model='messenger.input', name='text', md-maxlength='100')
+							div(ng-messages='messenger.text.$error')
+								div(ng-message="md-maxlength")
+									| Message too long!
+					md-button(layout='column', ng-click='onClick()')
+						md-icon(md-font-library='material-icons')
+							| attach_file
+//- Dialogs
+div(style='visibility: hidden')
+	#myDialog.md-dialog-container
+		md-dialog(layout-padding='')
+			md-dialog-content
+				h2 Pre-Rendered Dialog

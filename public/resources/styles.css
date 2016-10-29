@@ -2,10 +2,6 @@
 	display: none !important;
 }
 
-body,html {
-	background:#eff0f1;
-}
-
 #banner {
 	padding: 0 8px;
 }
@@ -14,7 +10,15 @@ body,html {
 	margin: 0 !important;
 }
 
+.no-margin {
+	margin: 0 !important;
+}
+
 #sitehead {
 	margin: 20px;
 	margin-top: 60px;
+}
+
+.innerNav {
+	z-index: 1 !important;
 }

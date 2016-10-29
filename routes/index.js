@@ -1,8 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var path = require('path');
+const path    = require('path');
+const router  = require('express').Router();
 
-/* GET home page. */
+const dev        = require('./utils').Dev('router');
+const chatterApi = require('./chatter');
+
+/* Sitewide routes */
 router.get('/', function(req, res, next) {
 	res.render('index');
 });
@@ -12,10 +14,16 @@ router.get('/template/:name', function(req, res, next) {
 	res.render(template);
 });
 
-router.all('/project/*', function(req, res, next) {
+router.all('/projects/*', function(req, res, next) {
 	res.render('index');
 });
 
+
+/* Import Api */
+router.use('/api/chatter/', chatterApi);
+
+
+/** Catch all to fix refresh issue */
 router.all('/home/*', function(req, res, next) {
 	res.render('index');
 });

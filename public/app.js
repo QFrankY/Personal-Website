@@ -3,68 +3,46 @@
  */
 require([
 	'angular',
-	'angular-material',
+	'./themes',
+	'./options',
+
 	'angular-route',
 	'angular-resource',
 
 	'./controllers'
-], function (ng) {
+], function (ng, themes, options) {
 	'use strict';
 
 	var app = ng.module('MainApp', [
 		'ngMaterial',
+		'ngMessages',
 		'ngRoute',
 		'ngResource',
 		'allControllers'
 	]);
 
 	/** Angular Material Set up*/
-	app.config(['$mdThemingProvider', '$locationProvider', '$routeProvider',
-		function ($mdThemingProvider, $locationProvider, $routeProvider) {
-			/** Setting html5 */
-			$locationProvider.html5Mode({
-				enabled: true,
-				requireBase: false
-			});
+	app.config(['$locationProvider', '$logProvider', '$routeProvider',
+			function ($locationProvider, $logProvider, $routeProvider) {
+				/** Setting html5 */
+				$locationProvider.html5Mode({
+					enabled     : true,
+					requireBase : false
+				});
 
-			var customGrey = $mdThemingProvider.extendPalette('grey', {
-				'50': '#ffffff',
-				'100': '#eeeeee'
-			});
+				$routeProvider.when('/home', {
+					templateUrl : '/template/home',
+					controller  : 'HomeCtrl'
+				}).when('/projects/chatter', {
+					templateUrl : '/template/chatter',
+					controller  : 'ChatterCtrl'
+				}).otherwise({
+					redirectTo: '/home'
+				});
 
-			var customBlue = $mdThemingProvider.extendPalette('light-blue', {
-				'50': '#ffffff',
-			});
-
-			$mdThemingProvider.definePalette('customGrey', customGrey);
-
-			$mdThemingProvider.definePalette('customBlue', customBlue);
-
-			$mdThemingProvider.theme('default')
-				.primaryPalette('customBlue', {
-					'default' : '600',
-					'hue-3'   : '800',
-					'hue-2'   : '100',
-					'hue-1'		: '50'
-				})
-				.accentPalette('pink')
-				.warnPalette('red')
-				.backgroundPalette('customGrey', {
-					'default' : '50',
-					'hue-1'   : '100'
-				})
-
-			$routeProvider.when('/home', {
-				templateUrl : '/template/home',
-				controller  : 'HomeCtrl'
-			}).when('/project/chatter', {
-				templateUrl : '/template/chatter',
-				controller  : 'ChatterCtrl'
-			}).otherwise({
-				redirectTo: '/home'
-			});
-		}
-	]);
+				$logProvider.debugEnabled(options.debugEnabled);
+			}])
+		.config(themes); // Importing themes
 
 	ng.bootstrap(document, ['MainApp'], {
 		strictDi: true

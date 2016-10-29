@@ -7,9 +7,9 @@ define([
 	'use strict';
 
 	return [
-		'$scope',
-		function ($scope) {
-			
+		'$rootScope',
+		function ($rootScope) {
+			$rootScope.siteBannerTitle = 'Home';
 		}
 	];
 });

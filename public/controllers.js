@@ -6,16 +6,20 @@ define([
 	'angular',
 
 	// Importing other controllers
-	'home/HomeCtrl',
-	'chatter/ChatterCtrl'
+	'home/home-ctrl',
+	'chatter/chatter-ctrl',
+
+	// Controller resources
+	'services/index'
 ], function (ng, HomeCtrl, ChatterCtrl) {
 	'use strict';
 
 	var MainCtrl = [
 		'$scope',
 		'$mdSidenav',
-		function ($scope, $mdSidenav) {
-			$scope.siteBannerTitle = 'Home';
+		'$rootScope',
+		function ($scope, $mdSidenav, $rootScope) {
+			$rootScope.siteBannerTitle = 'Home';
 
 			$scope.toggleLeftMenu = function() {
 				$mdSidenav('left').toggle();
@@ -24,7 +28,7 @@ define([
 			$scope.sideBar = {
 				menu : [
 					{
-						link  : '',
+						link  : '/',
 						title : 'Home',
 						icon  : 'home'
 					},
@@ -38,7 +42,7 @@ define([
 
 				projects : [
 					{
-						link  : '/project/chatter',
+						link  : '/projects/chatter',
 						title : 'Chatter',
 						icon  : 'messages'
 					}
@@ -51,21 +55,16 @@ define([
 						icon  : 'code'
 					},
 					{
-						link  : 'http://frank-yu.com/old/',
+						link  : '/old/',
 						title : 'Old Website',
 						icon  : 'web'
 					}
 				]
 			};
-
-			$scope.changeSiteTitle = function (newTitle) {
-				$scope.siteBannerTitle = newTitle;
-				$scope.toggleLeftMenu();
-			};
 		}
 	]
 
-	return ng.module('allControllers', [])
+	return ng.module('allControllers', ['allServices'])
 		.controller('HomeCtrl', HomeCtrl)
 		.controller('ChatterCtrl', ChatterCtrl)
 		.controller('MainCtrl', MainCtrl);

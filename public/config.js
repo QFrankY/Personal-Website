@@ -14,7 +14,11 @@ require.config({
 		'angular-aria'     : '/resources/lib/angular-aria/angular-aria.min',
 		'angular-animate'  : '/resources/lib/angular-animate/angular-animate.min',
 		'angular-messages' : '/resources/lib/angular-messages/angular-messages.min',
-		'angular-material' : '/resources/lib/angular-material/angular-material.min'
+		'angular-material' : '/resources/lib/angular-material/angular-material.min',
+
+		/** Sockets */
+		'socket'         : '/resources/lib/socket.io-client/socket.io',
+		'angular-socket' : '/resources/lib/socket.min'
 	},
 
 	shim: {
@@ -44,6 +48,10 @@ require.config({
 
 		'angular-material': {
 			deps: ['angular-messages', 'angular-aria', 'angular-animate']
+		},
+
+		'angular-socket': {
+			deps: ['angular', 'socket']
 		}
 	}
 });
