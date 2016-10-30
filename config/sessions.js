@@ -1,7 +1,7 @@
 const session    = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-var sess = session({
+var config = {
 	secret            : process.env.SESSION_SECRET,
 	saveUninitialized : true,
 	resave            : false,
@@ -12,10 +12,12 @@ var sess = session({
 		url        : process.env.MONGODB_URL,
 		touchAfter : 24 * 3600
 	})
-});
+}
 
 if (process.env.NODE_ENV == 'production') {
-	sess.cookie.secure = true;
+	config.cookie.secure = true;
 }
+
+var sess = session(config);
 
 module.exports = sess;
