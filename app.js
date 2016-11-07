@@ -1,8 +1,11 @@
 const express    = require('express');
 const path       = require('path');
-const session    = require('./config/sessions'); // The configured express-session object.
 const bodyParser = require('body-parser');
 const bluebird   = require('bluebird');
+
+const mongo   = require('./config/mongo');
+const mysql   = require('./config/mysql');
+const session = require('./config/sessions'); // The configured express-session object.
 
 // const favicon = require('serve-favicon');
 const app = express();
@@ -21,5 +24,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session);
+
+process.on('SIGINT', function() {
+  mongo.connection.close(function () {
+    console.log('Mongoose disconnected on app termination');
+    process.exit(0);
+  });
+
+  mysql.close();
+});
 
 module.exports = app;

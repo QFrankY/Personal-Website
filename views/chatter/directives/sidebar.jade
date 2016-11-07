@@ -1,0 +1,22 @@
+md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(md-component-id='chatterSide',
+	md-is-locked-open='true',
+	flex)
+	md-list(layout='column')
+		md-list-item.md-2-line(ng-if='model.user')
+			img.md-avatar(ng-src='{{model.user.image}}', alt='{{model.user.name}}')
+			.md-list-item-text
+				h3 {{model.user.name}}
+		md-list-item(md-colors="::{backgroundColor: 'primary-700'}")
+			p Rooms
+			md-button.md-secondary(ng-click='createRoom()')
+				| Add
+		md-list-item(layout-margin, ng-if='!model.rooms')
+			md-progress-circular
+		md-list-item.md-2-line(ng-if='model.rooms',
+			ng-repeat='room in model.rooms',
+			ng-click='joinRoom(room.name, room.id)')
+			md-icon.md-avatar-icon(md-font-library='material-icons')
+				| chat_bubble
+			.md-list-item-text
+				h3 {{room.name}}
+				p {{room.numConnections}} connected

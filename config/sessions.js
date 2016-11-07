@@ -18,6 +18,6 @@ if (process.env.NODE_ENV == 'production') {
 	config.cookie.secure = true;
 }
 
-var sess = session(config);
+const sess = session(config);
 
 module.exports = sess;

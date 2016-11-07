@@ -10,7 +10,8 @@ define([
 	'chatter/chatter-ctrl',
 
 	// Controller resources
-	'services/index'
+	'services/index',
+	'directives/index'
 ], function (ng, HomeCtrl, ChatterCtrl) {
 	'use strict';
 
@@ -64,7 +65,7 @@ define([
 		}
 	]
 
-	return ng.module('allControllers', ['allServices'])
+	return ng.module('allControllers', ['directives', 'services'])
 		.controller('HomeCtrl', HomeCtrl)
 		.controller('ChatterCtrl', ChatterCtrl)
 		.controller('MainCtrl', MainCtrl);

@@ -4,14 +4,16 @@
 
 define([
 	'angular',
+	'./error-svc',
 	'./socket-svc',
 	'../chatter/chatter-svc',
 
 	'angular-socket'
-], function (ng, socketSvc, chatterSvc) {
+], function (ng, errorSvc, socketSvc, chatterSvc) {
 	'use strict';
 
-	return ng.module('allServices', ['btford.socket-io'])
+	return ng.module('services', ['btford.socket-io'])
+		.factory('errorSvc', errorSvc)
 		.factory('socketSvc', socketSvc)
 		.factory('chatterSvc', chatterSvc)
 		.run(['$log', function ($log) {

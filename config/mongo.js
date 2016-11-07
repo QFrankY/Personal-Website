@@ -1,17 +1,13 @@
 const mongo = require('mongoose');
 
-const dev   = require('../routes/utils').Dev('mongo');
+const dev = require('../routes/utils').Dev('mongo');
+
 const options = {
 	server: { 
-		socketOptions: { 
-			keepAlive: 300000,
-			connectTimeoutMS: 30000 
-		}
-	},
-	replset: {
+		poolSize: 5,
+		reconnectTries: Number.MAX_VALUE,
 		socketOptions: {
-			keepAlive: 300000,
-			connectTimeoutMS : 30000
+			keepAlive: 1000
 		}
 	}
 };
@@ -25,5 +21,13 @@ mongo.connection.on('connected', function () {
 mongo.connection.on('disconnected', function () {
 	dev.err('Disconnected from mongodb');
 });
+
+mongo.connection.on('reconnect', function () {
+	dev.prog('Reconnecting...')
+});
+
+mongo.connection.on('error', function (err) {
+	dev.err(err);
+})
 
 module.exports = mongo;

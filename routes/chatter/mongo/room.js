@@ -5,6 +5,7 @@ const dev   = require('../../utils').Dev('Room');
 
 const RoomSchema = new Schema ({
 	name  : String,
+	id    : String,
 	users : Array
 });
 
@@ -19,5 +20,9 @@ RoomSchema.post('remove', function (_room, next) {
 });
 
 const Room = mongo.model('chatter_room', RoomSchema);
+
+Room.remove({}, function () {
+	dev.log('Successfully removed all rooms.');
+});
 
 module.exports = Room;

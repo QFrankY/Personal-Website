@@ -14,6 +14,11 @@ router.get('/template/:name', function(req, res, next) {
 	res.render(template);
 });
 
+router.get('/directive/:folder/:name', function(req, res, next) {
+	var directive = path.join(req.params.folder, 'directives', req.params.name + '.jade');
+	res.render(directive);
+});
+
 router.all('/projects/*', function(req, res, next) {
 	res.render('index');
 });

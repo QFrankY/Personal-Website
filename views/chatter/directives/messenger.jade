@@ -1,0 +1,17 @@
+md-card
+	md-card-content(layout='row')
+		form(name='messenger', layout='column', flex)
+			md-input-container
+				label Message
+				input#messenger(autocomplete='off', 
+					ng-disabled='model.loading', 
+					ng-model='model.input',
+					name='text',
+					md-maxlength='100')
+				div(ng-messages='model.text.$error')
+					div(ng-message="md-maxlength")
+						| Message too long!
+		md-button(layout='column', ng-click='onClick()', ng-disabled='model.loading')
+			md-icon(md-font-library='material-icons', ng-if='!model.loading')
+				| send
+			md-progress-circular(md-mode='indeterminate', ng-if='model.loading')
