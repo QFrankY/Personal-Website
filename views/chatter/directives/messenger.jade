@@ -1,4 +1,5 @@
 md-card
+	md-progress-linear(md-mode='indeterminate', ng-if='model.loading')
 	md-card-content(layout='row')
 		form(name='messenger', layout='column', flex)
 			md-input-container
@@ -12,6 +13,5 @@ md-card
 					div(ng-message="md-maxlength")
 						| Message too long!
 		md-button(layout='column', ng-click='onClick()', ng-disabled='model.loading')
-			md-icon(md-font-library='material-icons', ng-if='!model.loading')
+			md-icon(md-font-library='material-icons')
 				| send
-			md-progress-circular(md-mode='indeterminate', ng-if='model.loading')

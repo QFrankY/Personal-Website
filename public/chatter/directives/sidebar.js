@@ -2,11 +2,10 @@ define(function () {
 	'use strict';
 
 	return [
-		'$http',
 		'$mdDialog',
 		'chatterSvc',
 		'errorSvc',
-		function ($http, $mdDialog, chatterSvc, errorSvc) {
+		function ($mdDialog, chatterSvc, errorSvc) {
 			return {
 				restrict    : 'E',
 				templateUrl : '/directive/chatter/sidebar',
@@ -19,13 +18,11 @@ define(function () {
 					pre: function (scope, elem, attrs) {
 						var model = scope.model;
 
-						$http.defaults.headers.common['socket-id'] = model.socketId;
-
-						chatterSvc.getRooms($http).then(function (rooms) {
+						chatterSvc.getRooms().then(function (rooms) {
 							model.rooms = rooms;
 						});
 
-						chatterSvc.getUser($http).then(function (user) {
+						chatterSvc.getUser().then(function (user) {
 							if (!user) {
 								var userNameDialog = $mdDialog.prompt()
 									.title('Choose a display name')
@@ -35,7 +32,7 @@ define(function () {
 									.cancel('Random name');
 
 								$mdDialog.show(userNameDialog).then(function(result) {
-									chatterSvc.postUser($http, result).then(function (user) {
+									chatterSvc.postUser(result).then(function (user) {
 										model.user = user;
 									});
 								});
@@ -59,7 +56,7 @@ define(function () {
 							}
 
 							if (validJoin) {
-								chatterSvc.postRoom($http, room, id).then(function (_room) {
+								chatterSvc.postRoom(room, id).then(function (_room) {
 									model.newTab(_room);
 								});
 							} else {

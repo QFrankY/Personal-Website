@@ -2,9 +2,8 @@ define(function () {
 	'use strict';
 
 	return [
-		'$http',
 		'chatterSvc',
-		function ($http, chatterSvc) {
+		function (chatterSvc) {
 
 			return {
 				restrict    : 'E',
@@ -18,13 +17,11 @@ define(function () {
 					pre: function (scope, elem, attr) {
 						var model = scope.model;
 
-						$http.defaults.headers.common['socket-id'] = model.socketId;
-
 						var sendMessage = model.sendMessage = function () {
 							model.loading = true;
 							var tab = model.getActiveTab();
 
-							chatterSvc.postMessage($http, model.input, tab.name, tab.id).then(function () {
+							chatterSvc.postMessage(model.input, tab.name, tab.id).then(function () {
 								model.input   = null;
 								model.loading = false;
 							});

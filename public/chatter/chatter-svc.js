@@ -6,14 +6,15 @@ define(function () {
 	'use strict';
 
 	return [
+		'$http',
 		'$q',
 		'errorSvc',
-		function ($q, errorSvc) {
+		function ($http, $q, errorSvc) {
 			const formatImageUrl = function(imageNum) {
 				return "https://s3-us-west-2.amazonaws.com/frankyu/chatter/profile/img" + imageNum + '.png';
 			};
 
-			const getRooms = function ($http) {
+			const getRooms = function () {
 				var deferred = $q.defer();
 
 				$http.get('/api/chatter/rooms').then(function (res) {
@@ -26,7 +27,7 @@ define(function () {
 				return deferred.promise;
 			};
 
-			const postRoom = function ($http, room, id) {
+			const postRoom = function (room, id) {
 				var deferred = $q.defer();
 
 				var url = '/api/chatter/join/' + room;
@@ -44,7 +45,7 @@ define(function () {
 				return deferred.promise;
 			};
 
-			const getUser = function ($http) {
+			const getUser = function () {
 				var deferred = $q.defer();
 
 				$http.get('/api/chatter/user').then(function (res) {
@@ -61,7 +62,7 @@ define(function () {
 				return deferred.promise;
 			};
 
-			const postUser = function ($http, name) {
+			const postUser = function (name) {
 				var deferred = $q.defer();
 
 				$http.post('/api/chatter/user', {
@@ -78,7 +79,7 @@ define(function () {
 				return deferred.promise;
 			};
 
-			const postMessage = function($http, text, room, id) {
+			const postMessage = function(text, room, id) {
 				var deferred = $q.defer();
 
 				$http.post('/api/chatter/message', {

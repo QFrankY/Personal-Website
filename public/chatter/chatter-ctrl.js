@@ -20,32 +20,35 @@ define([
 			$rootScope.siteBannerTitle = 'Projects / Chatter';
 
 			/** SCOPE VARIABLES */
-			var tabs = $scope.tabs = [];
 			$scope.welcomeMsgOpen = true;
 			$scope.closeWelcomeMsg = function () {
 				$scope.welcomeMsgOpen = false;
-			};
-			$scope.selectTab = function (tab) {
-				$scope.selectedTab = tab;
 			};
 
 			/** DIRECTIVE MODELS */
 			$scope.sidebar = {
 				newTab: function (room) {
-					tabs.push({
-						name     : room.name,
-						id       : room.id,
-						messages : [],
-						users    : []
+					$scope.window.tabs.push({
+						name      : room.name,
+						id        : room.id,
+						messages  : [],
+						users     : [],
 					});
 				},
 				getTabs: function () {
-					return tabs;
+					return $scope.window.tabs;
 				}
 			};
 			$scope.messenger = {
 				getActiveTab: function () {
 					return $scope.selectedTab;
+				}
+			};
+			$scope.window = {
+				tabs: [],
+				selectTab: function (tab) {
+					console.log(tab);
+					$scope.selectedTab = tab;
 				}
 			};
 
@@ -70,6 +73,8 @@ define([
 
 			/** Socket event for new message */
 			socket.on('message', function (message) {
+				var tabs = $scope.window.tabs;
+
 				for (var i = 0; i < tabs.length; i++) {
 					if (message.roomId === tabs[i].id) {
 						tabs[i].messages.push({
@@ -79,13 +84,11 @@ define([
 						});
 						break;
 					}
-				}
+				}$scope.sidebar.socketId
 			});
 
 			socketFetched.promise.then(function (socketId) {
-				$scope.sidebar.socketId   = socketId;
-				$scope.messenger.socketId = socketId;
-				$scope.socketFetched      = true;
+				$scope.socketFetched = true;
 			});
 		}
 	];

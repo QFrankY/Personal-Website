@@ -1,0 +1,28 @@
+md-tabs(layout='column',
+	md-border-bottom,
+	md-swipe-content,
+	flex)
+	md-tab(ng-repeat='tab in model.tabs', md-on-select='model.selectTab(tab)')
+		md-tab-label
+			span(md-colors="{color:'default-primary-50'}")
+				| {{ tab.name }}
+		md-tab-body
+			md-list(flex)
+				md-list-item.md-2-line.md-long-text.no-margin(ng-repeat='message in tab.messages')
+					img.md-avatar(ng-src='{{message.imageUrl}}', alt='{{message.username}}')
+					.md-list-item-text(layout='column')
+						h3 {{message.username}}
+						p {{message.text}}
+			//- Menu FAB
+			md-fab-speed-dial.md-fling.md-fab-bottom-right(md-direction='up')
+				md-fab-trigger
+					md-button.md-fab(aria-label='Add...')
+						md-icon(md-font-library='material-icons')
+							| menu
+				md-fab-actions
+					md-button.md-fab.md-mini(aria-label='Add User')
+						md-icon(md-font-library='material-icons')
+							| menu
+					md-button.md-fab.md-mini(aria-label='Add Group')
+						md-icon(md-font-library='material-icons')
+							| menu
