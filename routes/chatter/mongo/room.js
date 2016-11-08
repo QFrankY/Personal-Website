@@ -1,7 +1,7 @@
+const mongoose = require('mongoose');
 const Schema   = require('mongoose').Schema;
 
-const mongo = require('../../../config/mongo');
-const dev   = require('../../utils').Dev('Room');
+const dev = require('../../utils').Dev('Room');
 
 const RoomSchema = new Schema ({
 	name  : String,
@@ -19,7 +19,7 @@ RoomSchema.post('remove', function (_room, next) {
 	next();
 });
 
-const Room = mongo.model('chatter_room', RoomSchema);
+const Room = mongoose.model('chatter_room', RoomSchema);
 
 Room.remove({}, function () {
 	dev.log('Successfully removed all rooms.');
