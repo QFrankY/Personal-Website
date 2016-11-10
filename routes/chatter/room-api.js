@@ -25,6 +25,10 @@ router.get('/join/:room/:id?', function (req, res) {
 	var room    = req.params.room;
 	var roomId  = req.params.id;
 
+	if (!req.session.user) {
+		res.status(500).send("No request session information");
+	}
+
 	if (room.length > 20) {
 		res.status(500).send({ msg: 'Room name too long.' });
 	} else if (roomId) {
