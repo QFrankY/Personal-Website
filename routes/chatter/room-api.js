@@ -25,6 +25,8 @@ router.get('/join/:room/:id?', function (req, res) {
 	var room    = req.params.room;
 	var roomId  = req.params.id;
 
+	console.log(!req.session.user);
+
 	if (!req.session.user) {
 		res.status(500).send("No request session information");
 	}
