@@ -8,8 +8,7 @@ const util   = require('util');
 const inspect  = util.inspect;
 const isObject = util.isObject; // Returns true for arrays and objects.
 
-const inDevMode   = (process.env.NODE_ENV === 'development');
-const isLocalHost = process.env.IS_LOCAL_HOST && JSON.parse(process.env.IS_LOCAL_HOST);
+const inDevMode = (process.env.NODE_ENV === 'development');
 
 var Dev = function (context) {
 	this.context = context;
@@ -20,23 +19,12 @@ var NoopDev = function () {}; // Noop class.
 var queue    = [];
 var useQueue = false;
 var now      = null;
-var devSvc   = null;
 
 /** Methods */
 
-var addTimeStamp = null;
-
-if (isLocalHost) {
-	addTimeStamp = function (text) {
-		return text;
-	};
-} else {
-	addTimeStamp = function (text) {
-		var now = (new Date()).toISOString();
-
-		return '[' + now + ']' + text;
-	};
-}
+addTimeStamp = function (text) {
+	return text;
+};
 
 var getLogger = function (colorName, allowObjects) {
 	var color     = colors[colorName];
@@ -88,14 +76,10 @@ NoopDev.prototype.err   = noop;
 NoopDev.prototype.debug = noop;
 NoopDev.prototype.exec  = noop;
 
-if (inDevMode) {
-	/** Export as a service. */
-	devSvc = function (context) {
-		return new Dev(context);
-	};
-} else {
-	devSvc = function () { return new NoopDev(); };
-}
+/** Export as a service. */
+devSvc = function (context) {
+	return new Dev(context);
+};
 
 /** Statics */
 
