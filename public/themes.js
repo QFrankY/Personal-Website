@@ -55,8 +55,8 @@ define([
 
 			$mdThemingProvider.theme('chatter')
 				.primaryPalette('light-blue')
-				.accentPalette('purple')
-				.warnPalette('pink')
+				.accentPalette('pink')
+				.warnPalette('red')
 				.backgroundPalette('blue-grey')
 				.dark();
 		}

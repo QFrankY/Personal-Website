@@ -37,6 +37,9 @@ define([
 				},
 				getTabs: function () {
 					return $scope.window.tabs;
+				},
+				getActiveTab: function () {
+					return $scope.selectedTab;
 				}
 			};
 			$scope.messenger = {
@@ -47,8 +50,8 @@ define([
 			$scope.window = {
 				tabs: [],
 				selectTab: function (tab) {
-					console.log(tab);
 					$scope.selectedTab = tab;
+					$scope.sidebar.setTab(tab);
 				}
 			};
 
@@ -85,6 +88,19 @@ define([
 						break;
 					}
 				}$scope.sidebar.socketId
+			});
+
+			/** Socket event for new user */
+			socket.on('newUser', function (user) {
+				for (var i = 0; i < $scope.sidebar.rooms.length; i++) {
+					if ($scope.sidebar.rooms[i].id === user.roomId) {
+						$scope.sidebar.rooms[i].numConnections++;
+					}
+				}
+
+				if ($scope.selectedTab.id === user.roomId) {
+					$scope.sidebar.addUser(user);
+				}
 			});
 
 			socketFetched.promise.then(function (socketId) {

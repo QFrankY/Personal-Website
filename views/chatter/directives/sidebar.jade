@@ -1,4 +1,5 @@
-md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(md-component-id='chatterSide',
+md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(layout='column',
+	md-component-id='chatterSide',
 	md-is-locked-open='true',
 	flex)
 	md-list(layout='column')
@@ -6,17 +7,31 @@ md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(md-component-id='chatterS
 			img.md-avatar(ng-src='{{model.user.image}}', alt='{{model.user.name}}')
 			.md-list-item-text
 				h3 {{model.user.name}}
-		md-list-item(md-colors="::{backgroundColor: 'primary-700'}")
-			p Rooms
-			md-button.md-secondary(ng-click='createRoom()')
-				| Add
-		md-list-item(layout-margin, ng-if='!model.rooms')
-			md-progress-circular
-		md-list-item.md-2-line(ng-if='model.rooms',
-			ng-repeat='room in model.rooms',
-			ng-click='joinRoom(room.name, room.id)')
-			md-icon.md-avatar-icon(md-font-library='material-icons')
-				| chat_bubble
-			.md-list-item-text
-				h3 {{room.name}}
-				p {{room.numConnections}} connected
+		md-divider
+	md-tabs(layout='column',
+		md-stretch-tabs='always',
+		md-selected='selectedTab',
+		flex)
+		md-tab(label="Rooms")
+			md-list
+				md-progress-circular(md-mode='indeterminate', ng-if='!model.rooms')
+				md-list-item.md-2-line(ng-if='model.rooms',
+					ng-repeat='room in model.rooms',
+					ng-click='joinRoom(room.name, room.id)')
+					md-icon.md-avatar-icon(md-font-library='material-icons')
+						| chat_bubble
+					.md-list-item-text
+						h3 {{room.name}}
+						p {{room.numConnections}} connected
+			md-button.md-fab.md-fab-bottom-right(ng-click='createRoom()')
+				md-icon(md-font-library='material-icons')
+					| add
+		md-tab(label="Current",
+			ng-disabled='!tab')
+			md-list
+				md-progress-circular(md-mode='indeterminate', ng-if='!currentRoomUsers')
+				md-list-item(ng-if='currentRoomUsers',
+					ng-repeat='user in currentRoomUsers')
+					img.md-avatar(ng-src='{{user.image}}', alt='{{user.name}}')
+					span(md-colors="{color:'default-primary-50'}")
+						| {{user.name}}

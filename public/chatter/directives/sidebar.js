@@ -3,9 +3,10 @@ define(function () {
 
 	return [
 		'$mdDialog',
+		'$q',
 		'chatterSvc',
 		'errorSvc',
-		function ($mdDialog, chatterSvc, errorSvc) {
+		function ($mdDialog, $q, chatterSvc, errorSvc) {
 			return {
 				restrict    : 'E',
 				templateUrl : '/directive/chatter/sidebar',
@@ -17,6 +18,39 @@ define(function () {
 				link: {
 					pre: function (scope, elem, attrs) {
 						var model = scope.model;
+
+						scope.selectedTab = 0;
+						
+						var usersDeferred;
+
+						model.setTab = function (tab) {
+							scope.tab         = tab;
+							usersDeferred     = $q.defer();
+							scope.selectedTab = 1;
+
+							fetchUsers();
+						};
+
+						model.addUser = function (user) {
+							usersDeferred.promise.then(function () {
+								var userFound = false;
+
+								for (var i = 0; i < scope.currentRoomUsers.length; i++) {
+									if (scope.currentRoomUsers[i].id === user.id) {
+										userFound = true;
+										break;
+									}
+								}
+
+								if (!userFound) {
+									scope.currentRoomUsers.push({
+										name  : user.name,
+										image : chatterSvc.formatImageUrl(user.imageNum),
+										id    : user.id
+									});
+								}
+							});
+						}
 
 						chatterSvc.getRooms().then(function (rooms) {
 							model.rooms = rooms;
@@ -76,8 +110,29 @@ define(function () {
 								joinRoom(result);
 							});	
 						}
+
+						var fetchUsers = function (switchingTabs) {
+							scope.currentRoomUsers = null;
+
+							chatterSvc.getRoomUsers(scope.tab.id).then(function (users) {
+								/** Removing duplicates */
+								var tempArr = [];
+								var hashTable = {};
+
+								for (var i = 0; i < users.length; i++) {
+									if (!hashTable[users[i].id]) {
+										users[i].image = chatterSvc.formatImageUrl(users[i].imageNum);
+										tempArr.push(users[i]);
+										hashTable[users[i].id] = true;
+									}
+								}
+
+								scope.currentRoomUsers = tempArr;
+								usersDeferred.resolve();
+							});
+						};
 					}
-				} 
+				}
 			};
 		}
 	];

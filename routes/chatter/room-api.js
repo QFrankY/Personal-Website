@@ -49,6 +49,12 @@ router.get('/join/:room/:id?', function (req, res) {
 			} else {
 				socket.join('room_' + _room.name + _room.id);
 				dev.log(req.session.user.name + ' successfully joined chatter room: ' + room);
+				chatter.emit('newUser', {
+					id       : req.session.user.id,
+					roomId   : _room.id,
+					name     : req.session.user.name,
+					imageNum : req.session.user.imageNum
+				});
 				res.status(200).send({
 					id   : _room.id,
 					name : _room.name

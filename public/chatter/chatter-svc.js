@@ -62,6 +62,19 @@ define(function () {
 				return deferred.promise;
 			};
 
+			const getRoomUsers = function (id) {
+				var deferred = $q.defer();
+
+				$http.get('/api/chatter/users/' + id).then(function (res) {
+					deferred.resolve(res.data.users);
+				}, function (err) {
+					errorSvc.prompt(err.data.msg);
+					deferred.reject();
+				});
+
+				return deferred.promise;
+			};
+
 			const postUser = function (name) {
 				var deferred = $q.defer();
 
@@ -101,6 +114,7 @@ define(function () {
 				getRooms       : getRooms,
 				postRoom       : postRoom,
 				getUser        : getUser,
+				getRoomUsers   : getRoomUsers,
 				postUser       : postUser,
 				postMessage    : postMessage
 			};

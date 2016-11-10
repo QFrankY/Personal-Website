@@ -1,9 +1,10 @@
 md-tabs(layout='column',
 	md-border-bottom,
 	md-swipe-content,
+	md-autoselect,
 	flex)
 	md-tab(ng-repeat='tab in model.tabs', md-on-select='model.selectTab(tab)')
-		md-tab-label
+		md-tab-label(md-colors="{color:'default-primary-50'}")
 			span(md-colors="{color:'default-primary-50'}")
 				| {{ tab.name }}
 		md-tab-body

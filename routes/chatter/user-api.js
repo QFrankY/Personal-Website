@@ -38,4 +38,20 @@ router.post('/user', function (req, res) {
 	res.status(200).send({ user: req.session.user });
 });
 
+/** Getting users from a specific room */
+router.get('/users/:roomId', function (req, res) {
+	Room.findOne({
+		id : req.params.roomId
+	}, {
+		"users.name"     : 1,
+		"users.id"       : 1,
+		"users.imageNum" : 1
+	}, function (err, room) {
+		if (err) {
+			res.status(500).send({ msg: "Could not fetch users in current room." });
+		}
+		res.status(200).send({ users: room.users });
+	});
+});
+
 module.exports = router;
