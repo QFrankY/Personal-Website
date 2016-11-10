@@ -69,6 +69,10 @@ define(function () {
 									chatterSvc.postUser(result).then(function (user) {
 										model.user = user;
 									});
+								}, function () {
+									chatterSvc.postUser().then(function (user) {
+										model.user = user;
+									});
 								});
 							} else {
 								model.user = user;
