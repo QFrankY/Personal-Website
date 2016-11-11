@@ -28,8 +28,8 @@ router.all('/projects/*', function(req, res, next) {
 router.use('/api/chatter/', chatterApi);
 
 
-/** Catch all to fix refresh issue */
-router.all('/home/*', function(req, res, next) {
+/** Catch all routes to fix refresh issue */
+router.all('*', function(req, res, next) {
 	res.render('index');
 });
 

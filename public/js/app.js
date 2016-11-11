@@ -1,7 +1,7 @@
 /**
  * @fileOverview Main application
  */
-require([
+define([
 	'angular',
 	'./themes',
 	'./options',
@@ -13,7 +13,7 @@ require([
 ], function (ng, themes, options) {
 	'use strict';
 
-	var app = ng.module('MainApp', [
+	var app = ng.module('app', [
 		'ngMaterial',
 		'ngMessages',
 		'ngRoute',
@@ -44,7 +44,5 @@ require([
 			}])
 		.config(themes); // Importing themes
 
-	ng.bootstrap(document, ['MainApp'], {
-		strictDi: true
-	});
+	return app;
 });

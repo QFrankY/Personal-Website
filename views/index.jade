@@ -2,15 +2,15 @@ doctype html
 html(lang='en')
 	head
 		title Frank Yu - Personal Website
-		link(href='/resources/lib/angular-material/angular-material.min.css',
+		link(href='/js/lib/angular-material/angular-material.min.css',
 			rel='stylesheet')
 		link(href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic',
 			rel='stylesheet')
 		link(href='https://fonts.googleapis.com/icon?family=Material+Icons',
 			rel='stylesheet')
-		link(href='/resources/styles.css',
+		link(href='/css/styles.css',
 			rel='stylesheet')
-		script(src='https://apis.google.com/js/platform.js', async='', defer='')
+
 	body(ng-controller='MainCtrl', layout='row', ng-cloak)
 		//- Sidebar
 		md-sidenav.md-sidenav-left.md-whiteframe-z2#sidebar(layout='column',
@@ -74,11 +74,4 @@ html(lang='en')
 			md-content(ng-view, layout='row', flex)
 
 		//- Loading JS files
-		script(data-main='/config.js', src='/resources/lib/require.js')
-		script.
-			/** Loading Application */
-			require([
-				'/app.js'
-			], function (MainApp) {
-				// On load
-			});
+		script(src='/js/lib/require.js', data-main='/js/config')

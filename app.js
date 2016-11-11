@@ -27,7 +27,6 @@ app.use(session);
 
 process.on('SIGINT', function() {
   mongo.connection.close(function () {
-    console.log('Mongoose disconnected on app termination');
     process.exit(0);
   });
 
