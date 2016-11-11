@@ -14,10 +14,6 @@ var config = {
 	})
 }
 
-if (process.env.NODE_ENV == 'production') {
-	config.cookie.secure = true;
-}
-
 const sess = session(config);
 
 module.exports = sess;
