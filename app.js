@@ -23,6 +23,11 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+if (process.env.NODE_ENV == 'production') {
+	app.set('trust proxy', 1);
+}
+
 app.use(session);
 
 process.on('SIGINT', function() {

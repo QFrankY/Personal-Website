@@ -34,8 +34,6 @@ router.post('/user', function (req, res) {
 	req.session.user.imageNum = Math.floor(Math.random() * 12) + 1;
 	req.session.user.id       = md5(req.session.id).toString();
 
-	console.log(req.session.user);
-
 	dev.log('Successfully attached user to session');
 	res.status(200).send({ user: req.session.user });
 });

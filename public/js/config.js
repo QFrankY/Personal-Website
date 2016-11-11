@@ -10,9 +10,6 @@ require.config({
 
 	/** Dependency Shortcuts */
 	paths: {
-		/** RequireJS Plugins */
-		'domReady' : 'lib/domReady',
-
 		/** Angular */
 		'angular': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min',
