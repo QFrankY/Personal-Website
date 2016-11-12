@@ -74,11 +74,10 @@ define(function () {
 									model.rooms[i].numConnections--;
 									if (model.rooms[i].numConnections === 0) {
 										model.rooms.splice(i,1);
+										i--;
 									}
 									if (!allRooms) {
 										break;
-									} else {
-										i--;
 									}
 								}
 							}
@@ -116,14 +115,14 @@ define(function () {
 							}
 						});
 
-						var joinRoom = scope.joinRoom = function (room, id) {
+						var joinRoom = scope.joinRoom = function (room) {
 							var validJoin = true;
 
-							if (id) {
+							if (room.id) {
 								var tabs = model.getTabs();
 
 								for (var i = 0; i < tabs.length; i++) {
-									if (tabs[i].id === id) {
+									if (tabs[i].id === room.id) {
 										validJoin = false;
 										break;
 									}
@@ -131,7 +130,7 @@ define(function () {
 							}
 
 							if (validJoin) {
-								chatterSvc.joinRoom(room, id).then(function (_room) {
+								chatterSvc.joinRoom(room.name, room.id).then(function (_room) {
 									model.newTab(_room);
 								});
 							} else {
@@ -148,7 +147,7 @@ define(function () {
 								.cancel('Cancel');
 
 							$mdDialog.show(dialog).then(function (result) {
-								joinRoom(result);
+								joinRoom({ name: result });
 							});	
 						}
 

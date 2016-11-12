@@ -17,7 +17,7 @@ md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(layout='column',
 				md-progress-circular(md-mode='indeterminate', ng-if='!model.rooms')
 				md-list-item.md-2-line(ng-if='model.rooms',
 					ng-repeat='room in model.rooms',
-					ng-click='joinRoom(room.name, room.id)')
+					ng-click='joinRoom(room)')
 					md-icon.md-avatar-icon(md-font-library='material-icons')
 						| chat_bubble
 					.md-list-item-text
