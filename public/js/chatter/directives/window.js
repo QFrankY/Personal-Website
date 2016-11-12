@@ -1,4 +1,6 @@
-define(function () {
+define([
+	'angular'
+], function (ng) {
 	'use strict';
 
 	return [
@@ -22,6 +24,10 @@ define(function () {
 
 						model.menuOpen = false;
 
+						model.updateMessages = function () {
+							scope.messages = model.selectedTab.messages;
+						};
+
 						scope.$watch('model.menuOpen', function (isOpen) {
 							if (isOpen) {
 								$timeout(function() {
@@ -32,14 +38,20 @@ define(function () {
 							}
 						});
 
-						scope.leaveRoom = function (tab) {
+						scope.$watchCollection('messages', function (newVal) {
+							if (newVal) {
+								$timeout(function () {
+									var element = ng.element(elem[0].getElementsByTagName('md-tab-content'))[scope.selectedTabIndex];
+									element.scrollTop = element.scrollHeight;
+								});
+							}
+						});
+
+						scope.leaveRoom = function () {
+							var tab = model.tabs[scope.selectedTabIndex];
+
 							chatterSvc.leaveRoom(tab.name, tab.id).then(function () {
-								for (var i = 0; i < model.tabs.length; i++) {
-									if (model.tabs[i] === tab) {
-										model.tabs.splice(i, 1);
-										break;
-									}
-								}
+								model.tabs.splice(scope.selectedTab, 1);
 
 								if (model.tabs.length === 0) {
 									model.resetSidebar();

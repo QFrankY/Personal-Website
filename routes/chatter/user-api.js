@@ -46,11 +46,11 @@ router.get('/users/:roomId', function (req, res) {
 		"users.name"     : 1,
 		"users.id"       : 1,
 		"users.imageNum" : 1
-	}, function (err, room) {
-		if (err) {
+	}, function (err, _room) {
+		if (err || !_room) {
 			res.status(500).send({ msg: "Could not fetch users in current room." });
 		}
-		res.status(200).send({ users: room.users });
+		res.status(200).send({ users: _room.users });
 	});
 });
 

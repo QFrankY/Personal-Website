@@ -18,15 +18,13 @@ define(function () {
 				link: {
 					pre: function (scope, elem, attrs) {
 						var model = scope.model;
-
-						scope.selectedTab = 0;
 						
 						var usersDeferred;
 
 						model.setTab = function (tab) {
-							scope.tab         = tab;
-							usersDeferred     = $q.defer();
-							scope.selectedTab = 1;
+							scope.tab              = tab;
+							usersDeferred          = $q.defer();
+							scope.selectedTabIndex = 1;
 
 							fetchUsers();
 						};
@@ -70,7 +68,7 @@ define(function () {
 							}
 
 							for (var i = 0; i < model.rooms.length; i++) {
-								if (model.rooms[i].id === user.roomId || user.rooms[model.rooms[i].id]) {
+								if (model.rooms[i].id === user.roomId || (user.rooms && user.rooms[model.rooms[i].id])) {
 									model.rooms[i].numConnections--;
 									if (model.rooms[i].numConnections === 0) {
 										model.rooms.splice(i,1);
@@ -84,8 +82,8 @@ define(function () {
 						};
 
 						model.resetCurrent = function () {
+							scope.tab              = null;
 							scope.currentRoomUsers = null;
-							scope.tab = null;
 						};
 
 						chatterSvc.getRooms().then(function (rooms) {

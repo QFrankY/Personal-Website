@@ -10,7 +10,7 @@ md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(layout='column',
 		md-divider
 	md-tabs(layout='column',
 		md-stretch-tabs='always',
-		md-selected='selectedTab',
+		md-selected='selectedTabIndex',
 		flex)
 		md-tab(label="Rooms")
 			md-list
@@ -23,11 +23,6 @@ md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(layout='column',
 					.md-list-item-text
 						h3 {{room.name}}
 						p {{room.numConnections}} connected
-			md-button.md-fab.md-fab-bottom-right(ng-click='createRoom()')
-				md-icon(md-font-library='material-icons')
-					| add
-				md-tooltip(md-direction='left')
-					| Create new room
 		md-tab(label="Current",
 			ng-disabled='!tab')
 			md-list
@@ -37,3 +32,9 @@ md-sidenav.md-sidenav-left.md-whiteframe-12dp.innerNav(layout='column',
 					img.md-avatar(ng-src='{{user.image}}', alt='{{user.name}}')
 					span(md-colors="{color:'default-primary-50'}")
 						| {{user.name}}
+	md-button.md-fab.md-fab-bottom-right(ng-if='selectedTabIndex === 0',
+		ng-click='createRoom()')
+		md-icon(md-font-library='material-icons')
+			| add
+		md-tooltip(md-direction='left')
+			| Create new room

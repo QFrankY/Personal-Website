@@ -51,6 +51,7 @@ define([
 				selectTab: function (tab) {
 					$scope.selectedTab = tab;
 					$scope.window.selectedTab = tab;
+					$scope.window.updateMessages();
 					$scope.sidebar.setTab(tab);
 				},
 				resetSidebar: function () {
@@ -84,6 +85,7 @@ define([
 							imageUrl : chatterSvc.formatImageUrl(message.imageNum),
 							text     : message.text
 						});
+
 						break;
 					}
 				}

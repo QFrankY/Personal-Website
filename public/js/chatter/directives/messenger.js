@@ -2,8 +2,9 @@ define(function () {
 	'use strict';
 
 	return [
+		'$timeout',
 		'chatterSvc',
-		function (chatterSvc) {
+		function ($timeout, chatterSvc) {
 
 			return {
 				restrict    : 'E',
@@ -15,7 +16,8 @@ define(function () {
 
 				link: {
 					pre: function (scope, elem, attr) {
-						var model = scope.model;
+						var model     = scope.model;
+						var messenger = document.getElementById('messenger');
 
 						var sendMessage = scope.sendMessage = function () {
 							scope.loading = true;
@@ -24,19 +26,19 @@ define(function () {
 							chatterSvc.postMessage(model.input, tab.name, tab.id).then(function () {
 								model.input   = null;
 								scope.loading = false;
+								 $timeout(function() {
+									messenger.focus(); 
+								});
 							});
 						};
 
-						document.getElementById('messenger').addEventListener('keypress', function (e) {
+						messenger.addEventListener('keypress', function (e) {
 							var key = e.which || e.keyCode;
 
 							if (key === 13 && model.input) {
 								sendMessage();
 							}
 						});
-					},
-
-					post: function (scope, elem, attr) {
 					}
 				}
 			};
