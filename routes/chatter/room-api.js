@@ -1,3 +1,4 @@
+const async  = require('async');
 const router = require('express').Router();
 const md5    = require('crypto-js/md5');
 
@@ -26,7 +27,7 @@ router.get('/join/:room/:id?', function (req, res) {
 	var roomId  = req.params.id;
 
 	if (!req.session.user) {
-		res.status(500).send("No request session information");
+		res.status(500).send("No session information available");
 	}
 
 	if (room.length > 20) {
@@ -53,7 +54,7 @@ router.get('/join/:room/:id?', function (req, res) {
 			} else {
 				socket.join('room_' + _room.name + _room.id);
 				dev.log(req.session.user.name + ' successfully joined chatter room: ' + room);
-				chatter.emit('newUser', {
+				chatter.emit('userJoin', {
 					id       : req.session.user.id,
 					roomId   : _room.id,
 					name     : req.session.user.name,
@@ -95,6 +96,59 @@ router.get('/join/:room/:id?', function (req, res) {
 	}
 });
 
+/** Leave room */
+router.get('/leave/:room/:id', function (req, res) {
+	var socket = getSocket(req, chatterSockets);
+	var room;
+
+	async.series([
+		function (callback) {
+			Room.findOneAndUpdate({
+				name : req.params.room,
+				id   : req.params.id
+			}, {
+				$pull: {
+					users: { socket: socket.id }
+				}
+			}, {
+				new: true
+			}, function (err, _room) {
+				if (err || !_room) {
+					callback(true);
+				} else {
+					room = _room;
+					dev.log(req.session.user.name + ' successfully left chatter room: ' + room.name);
+					callback();
+				}
+			});
+		},
+
+		function (callback) {
+			if (room.users.length === 0) {
+				room.remove(function() {
+					dev.log(room.name + ' is empty and has been removed.');
+					callback();
+				});
+			} else {
+				callback();
+			}
+		}
+	],
+
+	function (err, results) {
+		if (err) {
+			res.status(500).send({ msg: 'Could not leave room. Please try again later.' });
+		} else {
+			chatter.emit('userLeft', {
+				id     : req.session.user.id, 
+				roomId : req.params.id
+			});
+			socket.leave('room_' + room.name + room.id);
+			res.status(200).end()
+		}
+	});
+});
+
 /** Get users in a room */
 router.get('/room/users/:room', function (req, res) {
 	Room.findOne({
@@ -103,11 +157,11 @@ router.get('/room/users/:room', function (req, res) {
 		"users.imageNum" : 1,
 		"users.name"     : 1,
 		"users.id"       : 1
-	}, function (err, room) {
-		if (err) {
+	}, function (err, _room) {
+		if (err || !_room) {
 			res.status(500).send({ msg: err });
 		} else {
-			res.status(200).send({ users: room.users });
+			res.status(200).send({ users: _room.users });
 		}
 	});
 });

@@ -31,8 +31,7 @@ define([
 					$scope.window.tabs.push({
 						name      : room.name,
 						id        : room.id,
-						messages  : [],
-						users     : [],
+						messages  : []
 					});
 				},
 				getTabs: function () {
@@ -51,7 +50,11 @@ define([
 				tabs: [],
 				selectTab: function (tab) {
 					$scope.selectedTab = tab;
+					$scope.window.selectedTab = tab;
 					$scope.sidebar.setTab(tab);
+				},
+				resetSidebar: function () {
+					$scope.sidebar.resetCurrent();
 				}
 			};
 
@@ -66,10 +69,6 @@ define([
 			});
 
 			/** Socket event for refreshing list of rooms */
-			socket.on('rooms', function (rooms) {
-				$scope.sidebar.rooms = rooms;
-			});
-
 			socket.on('newRoom', function (room) {
 				$scope.sidebar.rooms.push(room);
 			});
@@ -87,20 +86,28 @@ define([
 						});
 						break;
 					}
-				}$scope.sidebar.socketId
+				}
 			});
 
-			/** Socket event for new user */
-			socket.on('newUser', function (user) {
+			/** User related socket events */
+			socket.on('userJoin', function (user) {
 				for (var i = 0; i < $scope.sidebar.rooms.length; i++) {
 					if ($scope.sidebar.rooms[i].id === user.roomId) {
 						$scope.sidebar.rooms[i].numConnections++;
 					}
 				}
 
-				if ($scope.selectedTab.id === user.roomId) {
+				if ($scope.selectedTab && $scope.selectedTab.id === user.roomId) {
 					$scope.sidebar.addUser(user);
 				}
+			});
+
+			socket.on('userLeft', function (user) {
+				$scope.sidebar.removeUser(user);
+			});
+
+			socket.on('userDisconnect', function (user) {
+				$scope.sidebar.removeUser(user, true);
 			});
 
 			socketFetched.promise.then(function (socketId) {

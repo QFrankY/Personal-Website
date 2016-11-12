@@ -1,17 +1,17 @@
 md-card
-	md-progress-linear(md-mode='indeterminate', ng-if='model.loading')
+	md-progress-linear(md-mode='indeterminate', ng-if='loading')
 	md-card-content(layout='row')
 		form(name='messenger', layout='column', flex)
 			md-input-container
 				label Message
 				input#messenger(autocomplete='off', 
-					ng-disabled='model.loading', 
+					ng-disabled='loading', 
 					ng-model='model.input',
 					name='text',
 					md-maxlength='100')
 				div(ng-messages='model.text.$error')
 					div(ng-message="md-maxlength")
 						| Message too long!
-		md-button(layout='column', ng-click='onClick()', ng-disabled='model.loading')
+		md-button(layout='column', ng-click='sendMessage()', ng-disabled='loading')
 			md-icon(md-font-library='material-icons')
 				| send

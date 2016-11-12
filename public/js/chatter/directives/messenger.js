@@ -17,13 +17,13 @@ define(function () {
 					pre: function (scope, elem, attr) {
 						var model = scope.model;
 
-						var sendMessage = model.sendMessage = function () {
-							model.loading = true;
+						var sendMessage = scope.sendMessage = function () {
+							scope.loading = true;
 							var tab = model.getActiveTab();
 
 							chatterSvc.postMessage(model.input, tab.name, tab.id).then(function () {
 								model.input   = null;
-								model.loading = false;
+								scope.loading = false;
 							});
 						};
 

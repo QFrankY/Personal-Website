@@ -15,15 +15,21 @@ md-tabs(layout='column',
 						h3 {{message.username}}
 						p {{message.text}}
 			//- Menu FAB
-			md-fab-speed-dial.md-fling.md-fab-bottom-right(md-direction='up')
+			md-fab-speed-dial.md-scale.md-fab-bottom-right(md-direction='up',
+				ng-if='model.selectedTab === tab',
+				md-open='model.menuOpen',
+				ng-mouseenter='model.menuOpen=true',
+				ng-mouseleave='model.menuOpen=false')
 				md-fab-trigger
 					md-button.md-fab(aria-label='Add...')
 						md-icon(md-font-library='material-icons')
 							| menu
 				md-fab-actions
-					md-button.md-fab.md-mini(aria-label='Add User')
+					md-button.md-fab.md-raised.md-mini(aria-label='Leave room',
+						ng-click='leaveRoom(tab)')
 						md-icon(md-font-library='material-icons')
-							| menu
-					md-button.md-fab.md-mini(aria-label='Add Group')
-						md-icon(md-font-library='material-icons')
-							| menu
+							| exit_to_app
+						md-tooltip(md-direction='left',
+							md-visible="tooltipVisible",
+							md-autohide="false")
+							| Leave room

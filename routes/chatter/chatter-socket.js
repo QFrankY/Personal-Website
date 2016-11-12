@@ -1,3 +1,5 @@
+const md5    = require('crypto-js/md5');
+
 const chatter = require('../../socket').io.of('/chatter');
 const dev     = require('../utils').Dev('chatter:sockets');
 
@@ -17,8 +19,11 @@ chatter.on('connection', function (_socket) {
 
 	_socket.emit(_socket.nsp.name, _socket.id);
 
-	_socket.on('disconnect', function () {
-		chatter.emit('rooms', getRoomList());
+	_socket.on('disconnecting', function () {
+		chatter.emit('userDisconnect', {
+			id    : md5(_socket.request.sessionID).toString(),
+			rooms : getUserRooms(_socket.rooms)
+		});
 
 		Room.update({
 			"users.socket": _socket.id
@@ -64,10 +69,22 @@ const getRoomList = function () {
 	});
 
 	return rooms;
-}
+};
+
+const getUserRooms = function (roomsObj) {
+	obj = {};
+
+	Object.keys(roomsObj).forEach(function(key, index) {
+		if (key.substr(0,5) == 'room_') {
+			obj[key.substring(key.length - 32)] = true;
+		};
+	});
+
+	return obj;
+};
 
 module.exports = {
 	chatterSockets : chatterSockets,
 	chatter        : chatter,
 	getRoomList    : getRoomList
-}
+};

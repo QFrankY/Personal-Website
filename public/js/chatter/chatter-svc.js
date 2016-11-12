@@ -27,7 +27,7 @@ define(function () {
 				return deferred.promise;
 			};
 
-			const postRoom = function (room, id) {
+			const joinRoom = function (room, id) {
 				var deferred = $q.defer();
 
 				var url = '/api/chatter/join/' + room;
@@ -37,6 +37,19 @@ define(function () {
 
 				$http.get(url).then(function (res) {
 					deferred.resolve(res.data);
+				}, function (err) {
+					errorSvc.prompt(err.data.msg);
+					deferred.reject();
+				});
+
+				return deferred.promise;
+			};
+
+			const leaveRoom = function (room, id) {
+				var deferred = $q.defer();
+
+				$http.get('/api/chatter/leave/' + room + '/' + id).then(function (res) {
+					deferred.resolve();
 				}, function (err) {
 					errorSvc.prompt(err.data.msg);
 					deferred.reject();
@@ -112,7 +125,8 @@ define(function () {
 			return {
 				formatImageUrl : formatImageUrl,
 				getRooms       : getRooms,
-				postRoom       : postRoom,
+				joinRoom       : joinRoom,
+				leaveRoom      : leaveRoom,
 				getUser        : getUser,
 				getRoomUsers   : getRoomUsers,
 				postUser       : postUser,

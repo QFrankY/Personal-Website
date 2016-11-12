@@ -38,19 +38,56 @@ define(function () {
 								for (var i = 0; i < scope.currentRoomUsers.length; i++) {
 									if (scope.currentRoomUsers[i].id === user.id) {
 										userFound = true;
+										scope.currentRoomUsers[i].numConnections++;
 										break;
 									}
 								}
 
 								if (!userFound) {
 									scope.currentRoomUsers.push({
-										name  : user.name,
-										image : chatterSvc.formatImageUrl(user.imageNum),
-										id    : user.id
+										name           : user.name,
+										image          : chatterSvc.formatImageUrl(user.imageNum),
+										id             : user.id,
+										numConnections : 1
 									});
 								}
 							});
-						}
+						};
+
+						model.removeUser = function (user, allRooms) {
+							if (scope.tab && (allRooms || scope.tab.id === user.roomId)) {
+								usersDeferred.promise.then(function () {
+									for (var i = 0; i < scope.currentRoomUsers.length; i++) {
+										if (scope.currentRoomUsers[i].id === user.id) {
+											scope.currentRoomUsers[i].numConnections--;
+											if (scope.currentRoomUsers[i].numConnections <= 0) {
+												scope.currentRoomUsers.splice(i,1);
+											}
+											break;
+										}
+									}
+								});
+							}
+
+							for (var i = 0; i < model.rooms.length; i++) {
+								if (model.rooms[i].id === user.roomId || user.rooms[model.rooms[i].id]) {
+									model.rooms[i].numConnections--;
+									if (model.rooms[i].numConnections === 0) {
+										model.rooms.splice(i,1);
+									}
+									if (!allRooms) {
+										break;
+									} else {
+										i--;
+									}
+								}
+							}
+						};
+
+						model.resetCurrent = function () {
+							scope.currentRoomUsers = null;
+							scope.tab = null;
+						};
 
 						chatterSvc.getRooms().then(function (rooms) {
 							model.rooms = rooms;
@@ -94,7 +131,7 @@ define(function () {
 							}
 
 							if (validJoin) {
-								chatterSvc.postRoom(room, id).then(function (_room) {
+								chatterSvc.joinRoom(room, id).then(function (_room) {
 									model.newTab(_room);
 								});
 							} else {
@@ -127,8 +164,14 @@ define(function () {
 									if (!hashTable[users[i].id]) {
 										users[i].image = chatterSvc.formatImageUrl(users[i].imageNum);
 										tempArr.push(users[i]);
-										hashTable[users[i].id] = true;
+										hashTable[users[i].id] = 1;
+									} else {
+										hashTable[users[i].id]++;
 									}
+								}
+
+								for (var i = 0; i < tempArr.length; i++) {
+									tempArr[i].numConnections = hashTable[tempArr[i].id];
 								}
 
 								scope.currentRoomUsers = tempArr;
