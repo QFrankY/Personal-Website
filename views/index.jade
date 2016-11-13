@@ -67,8 +67,17 @@ html(lang='en')
 						aria-label='Menu')
 						md-icon(md-font-library='material-icons')
 							| menu
-					h3.md-headline(layout='row', layout-align='center center')
+					h3.md-headline
 						| {{ siteBannerTitle }}
+					span(flex)
+					md-button.md-icon-button.md-ink-ripple(ng-if='projectSourceCode',
+						href='{{ projectSourceCode }}',
+						target='_blank',
+						aria-label='Source Code')
+						md-icon(md-font-library='material-icons')
+							| code
+						md-tooltip
+							| Source Code
 
 			//- Main content
 			md-content(ng-view, layout='row', flex)

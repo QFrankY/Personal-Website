@@ -36,6 +36,9 @@ define([
 				}).when('/projects/chatter', {
 					templateUrl : '/template/chatter',
 					controller  : 'ChatterCtrl'
+				}).when('/projects/graphsort', {
+					templateUrl : '/template/graph',
+					controller  : 'GraphCtrl'
 				}).otherwise({
 					redirectTo: '/home'
 				});

@@ -8,11 +8,12 @@ define([
 	// Importing other controllers
 	'home/home-ctrl',
 	'chatter/chatter-ctrl',
+	'graph/graph-ctrl',	
 
 	// Controller resources
 	'services/index',
 	'directives/index'
-], function (ng, HomeCtrl, ChatterCtrl) {
+], function (ng, HomeCtrl, ChatterCtrl, GraphCtrl) {
 	'use strict';
 
 	var MainCtrl = [
@@ -45,7 +46,12 @@ define([
 					{
 						link  : '/projects/chatter',
 						title : 'Chatter',
-						icon  : 'messages'
+						icon  : 'chat_bubble'
+					},
+					{
+						link  : '/projects/graphsort',
+						title : 'Graph Sort',
+						icon  : 'sort'
 					}
 				],
 
@@ -68,5 +74,6 @@ define([
 	return ng.module('allControllers', ['directives', 'services'])
 		.controller('HomeCtrl', HomeCtrl)
 		.controller('ChatterCtrl', ChatterCtrl)
+		.controller('GraphCtrl', GraphCtrl)
 		.controller('MainCtrl', MainCtrl);
 });
