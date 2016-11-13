@@ -49,8 +49,9 @@ router.get('/users/:roomId', function (req, res) {
 	}, function (err, _room) {
 		if (err || !_room) {
 			res.status(500).send({ msg: "Could not fetch users in current room." });
+		} else {
+			res.status(200).send({ users: _room.users });
 		}
-		res.status(200).send({ users: _room.users });
 	});
 });
 

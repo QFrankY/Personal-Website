@@ -19,10 +19,7 @@ define(function () {
 
 				$http.get('/api/chatter/rooms').then(function (res) {
 					deferred.resolve(res.data.rooms);
-				}, function (err) {
-					errorSvc.prompt(err.data.msg);
-					deferred.reject();
-				});
+				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;
 			};
@@ -37,10 +34,7 @@ define(function () {
 
 				$http.get(url).then(function (res) {
 					deferred.resolve(res.data);
-				}, function (err) {
-					errorSvc.prompt(err.data.msg);
-					deferred.reject();
-				});
+				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;
 			};
@@ -50,10 +44,7 @@ define(function () {
 
 				$http.get('/api/chatter/leave/' + room + '/' + id).then(function (res) {
 					deferred.resolve();
-				}, function (err) {
-					errorSvc.prompt(err.data.msg);
-					deferred.reject();
-				});
+				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;
 			};
@@ -67,10 +58,7 @@ define(function () {
 						user.image = formatImageUrl(user.imageNum);
 					}
 					deferred.resolve(res.data.user);
-				}, function (err) {
-					errorSvc.prompt(err.data.msg);
-					deferred.reject();
-				});
+				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;
 			};
@@ -80,10 +68,7 @@ define(function () {
 
 				$http.get('/api/chatter/users/' + id).then(function (res) {
 					deferred.resolve(res.data.users);
-				}, function (err) {
-					errorSvc.prompt(err.data.msg);
-					deferred.reject();
-				});
+				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;
 			};
@@ -97,10 +82,7 @@ define(function () {
 					var user   = res.data.user;
 					user.image = formatImageUrl(user.imageNum);
 					deferred.resolve(res.data.user);
-				}, function (err) {
-					errorSvc.prompt(err.data.msg);
-					deferred.reject();
-				});
+				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;
 			};
@@ -114,10 +96,19 @@ define(function () {
 					roomId : id
 				}).then(function (res) {
 					deferred.resolve(res.data.user);
-				}, function (err) {
-					errorSvc.prompt(err.data.msg);
-					deferred.reject();
-				});
+				}, errorSvc.promptHandler(deferred));
+
+				return deferred.promise;
+			};
+
+			const reconnect = function (rooms) {
+				var deferred = $q.defer();
+
+				$http.post('/api/chatter/room/reconnect', {
+					rooms: rooms
+				}).then(function (res) {
+
+				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;
 			};
@@ -130,7 +121,8 @@ define(function () {
 				getUser        : getUser,
 				getRoomUsers   : getRoomUsers,
 				postUser       : postUser,
-				postMessage    : postMessage
+				postMessage    : postMessage,
+				reconnect      : reconnect
 			};
 		}
 	];

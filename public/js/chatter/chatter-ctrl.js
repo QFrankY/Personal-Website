@@ -65,6 +65,7 @@ define([
 
 			/** Attaching socket id to requests */
 			socket.on('/chatter', function (socketId) {
+				$log.debug('Attaching socket id to request header.');
 				$http.defaults.headers.common['socket-id'] = socketId;
 				socketFetched.resolve(socketId);
 			});
@@ -110,6 +111,26 @@ define([
 
 			socket.on('userDisconnect', function (user) {
 				$scope.sidebar.removeUser(user, true);
+			});
+
+			/** Reconnect event  */
+			socket.on('reconnect', function () {
+				var rooms = [];
+
+				for (var i = 0; i < $scope.window.tabs.length; i++) {
+					rooms.push({
+						name : $scope.window.tabs[i].name,
+						id   : $scope.window.tabs[i].id
+					});
+				}
+
+				/** Wait for new socketid to be attached to headers */
+				socketFetched = $q.defer();
+				socketFetched.promise.then(function (socketId) {
+					chatterSvc.reconnect(rooms).then(function () {
+						$log.debug('Reconnect successful.');
+					});
+				});
 			});
 
 			socketFetched.promise.then(function (socketId) {

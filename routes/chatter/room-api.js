@@ -166,4 +166,54 @@ router.get('/room/users/:room', function (req, res) {
 	});
 });
 
+/** Rejoin all rooms on reconnect */
+router.post('/room/reconnect', function (req, res) {
+	var socket = getSocket(req, chatterSockets);
+	var rooms = req.body.rooms;
+
+	if (rooms instanceof Array && socket) {
+		async.each(rooms, function (room, callback) {
+			Room.findOneAndUpdate({
+				name : room.name,
+				id   : room.id
+			}, {
+				$push: {
+					users: {
+						id       : req.session.user.id,
+						socket   : req.headers['socket-id'],
+						name     : req.session.user.name,
+						imageNum : req.session.user.imageNum
+					}
+				}
+			}, {
+				upsert              : true,
+				setDefaultsOnInsert : true,
+				new                 : true
+			}, function (err, _room) {
+				if (err) {
+					dev.err(err);
+					callback(err);
+				} else {
+					socket.join('room_' + _room.name + _room.id, function () {
+						callback();
+					});
+				}
+			});
+		}, function (err) {
+			if (err) {
+				dev.err(err);
+				res.status(500).send({ msg: 'Socket connections lost. Could not reconnect.'});
+			} else {
+				dev.log(req.session.user.name + ' successfully reconnected');
+				res.status(200).end();
+			}
+		});
+	} else {
+		res.status(500).send({
+			msg     : 'Socket disconnected. Reconnect failed. Must refresh page.',
+			refresh : true
+		});
+	}
+});
+
 module.exports = router;
