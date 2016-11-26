@@ -9,10 +9,8 @@ define([
 		'$mdThemingProvider',
 		function ($mdThemingProvider) {
 			// Default theme
-			var customGrey = $mdThemingProvider.extendPalette('grey', {
-				'50'  : '#ffffff',
-				'100' : '#eeeeee',
-				'200' : '#eff0f1'
+			var customGrey = $mdThemingProvider.extendPalette('blue-grey', {
+				'50'  : '#ffffff'
 			});
 
 			var customBlue = $mdThemingProvider.extendPalette('light-blue', {
@@ -32,33 +30,25 @@ define([
 				.accentPalette('pink')
 				.warnPalette('red')
 				.backgroundPalette('customGrey', {
-					'default' : '50',
-					'hue-1'   : '50',
-					'hue-2'   : '200'
+					'hue-1' : '50'
 				});
 
 			// Chatter Theme
-			var customLightBlue = $mdThemingProvider.extendPalette('light-blue', {
-				'50'  : '#FFFCEB',
-				'900' : '#37474F'
-			});
-
-			$mdThemingProvider.definePalette('customLightBlue', customLightBlue);
-
-			// var customDarkBlue = $mdThemingProvider.extendPalette('blue', {
-			// 	'50'  : '#ffffff',
-			// 	'100' : '#f9f7f7',
-			// 	'900' : '#2b333d'
-			// });
-
-			// $mdThemingProvider.definePalette('customDarkBlue', customDarkBlue);
-
 			$mdThemingProvider.theme('chatter')
 				.primaryPalette('light-blue')
 				.accentPalette('pink')
 				.warnPalette('red')
 				.backgroundPalette('blue-grey')
 				.dark();
+
+			// Graph Sort Theme
+			$mdThemingProvider.theme('graphsort')
+				.primaryPalette('blue-grey')
+				.accentPalette('pink')
+				.warnPalette('red')
+				.backgroundPalette('customGrey', {
+					'hue-1' : '50'
+				});
 		}
 	];
 });
