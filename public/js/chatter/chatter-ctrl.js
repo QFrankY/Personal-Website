@@ -62,6 +62,7 @@ define([
 			/** SOCKETS */
 			var socket = socketSvc.getSocket('/chatter');
 			var socketFetched = $q.defer();
+			var socketReset = false;
 
 			/** Attaching socket id to requests */
 			socket.on('/chatter', function (socketId) {
@@ -114,6 +115,14 @@ define([
 			});
 
 			/** Reconnect event  */
+			socket.on('reconnecting', function () {
+				$log.debug('Reconnecting...');
+				if (!socketReset) {
+					socketFetched = $q.defer();
+					socketReset = true;
+				}
+			});
+
 			socket.on('reconnect', function () {
 				var rooms = [];
 
@@ -125,10 +134,10 @@ define([
 				}
 
 				/** Wait for new socketid to be attached to headers */
-				socketFetched = $q.defer();
 				socketFetched.promise.then(function (socketId) {
 					chatterSvc.reconnect(rooms).then(function () {
 						$log.debug('Reconnect successful.');
+						socketReset = false;
 					});
 				});
 			});
