@@ -64,6 +64,10 @@ define([
 			var socketFetched = $q.defer();
 			var socketReset = false;
 
+			$scope.$on('$locationChangeStart', function(event) {
+				socket.disconnect();
+			});
+
 			/** Attaching socket id to requests */
 			socket.on('/chatter', function (socketId) {
 				$log.debug('Attaching socket id to request header.');
