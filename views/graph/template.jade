@@ -1,0 +1,28 @@
+#GraphSort(layout='column',
+	layout-gt-md='row',
+	flex)
+	//- Main content
+	div(flex='33')
+		md-card(flex-gt-md='66',
+			md-colors="::{backgroundColor: 'primary-700'}")
+			md-card-title
+				md-card-title-text
+					span.md-headline Welcome to Chatter
+			md-card-content
+				p
+					| Click on a chat room on the left to join or create your own.
+			md-card-actions(layout="row" layout-align="end center")
+				md-button.md-icon-button(ng-click='closeWelcomeMsg()')
+					md-icon(md-font-library='material-icons')
+						| close
+		md-card
+			//-md-progress-linear
+			md-card-content(layout='row')
+				form(layout='column', flex)
+					md-input-container
+						label Items to Sort
+						textarea(rows='5')
+	div(flex='66', layout='row')
+		md-card(flex)
+			//-md-progress-linear
+			md-card-content(layout='row')

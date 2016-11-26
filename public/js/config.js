@@ -17,12 +17,12 @@ require.config({
 		],
 
 		'angular-resource': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.min',
 			'lib/angular-resource/angular-resource.min'
 		],
 		
 		'angular-route': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min',
 			'lib/angular-route/angular-route.min'
 		],
 
@@ -53,7 +53,13 @@ require.config({
 			'lib/socket.io-client/socket.io'
 		],
 
-		'angular-socket': 'lib/socket.min'
+		'angular-socket': 'lib/socket.min',
+
+		/** D3 */
+		'd3': [
+			'//d3js.org/d3.v4.min',
+			'lib/d3.min'
+		]
 	},
 
 	shim: {

@@ -17,15 +17,21 @@ define([
 	'use strict';
 
 	var MainCtrl = [
-		'$scope',
 		'$mdSidenav',
 		'$rootScope',
-		function ($scope, $mdSidenav, $rootScope) {
+		'$route',
+		'$scope',
+		function ($mdSidenav, $rootScope, $route, $scope) {
 			$rootScope.siteBannerTitle = 'Home';
 
 			$scope.toggleLeftMenu = function() {
 				$mdSidenav('left').toggle();
 			};
+
+			$rootScope.$on("$routeChangeSuccess", function(currentRoute, previousRoute){
+				$rootScope.pageTitle = $route.current.title;
+				delete $rootScope.projectSourceCode;
+			});
 
 			$scope.sideBar = {
 				menu : [
@@ -51,7 +57,7 @@ define([
 					{
 						link  : '/projects/graphsort',
 						title : 'Graph Sort',
-						icon  : 'sort'
+						icon  : 'timeline'
 					}
 				],
 

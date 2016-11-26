@@ -1,7 +1,8 @@
 doctype html
 html(lang='en')
 	head
-		title Frank Yu - Personal Website
+		title(ng-bind="'Frank Yu - ' + pageTitle")
+			| Frank Yu - Personal Website
 		link(href='/js/lib/angular-material/angular-material.min.css',
 			rel='stylesheet')
 		link(href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic',

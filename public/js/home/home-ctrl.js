@@ -7,13 +7,14 @@ define([
 	'use strict';
 
 	return [
-		'$rootScope',
+		'$location',
 		'$mdDialog',
+		'$rootScope',
 		'$timeout',
-		function ($rootScope, $mdDialog, $timeout) {
+		function ($location, $mdDialog, $rootScope, $timeout) {
 			$rootScope.siteBannerTitle = 'Home ( Under Construction )';
 
-			$mdDialog.show(
+			var dialog = $mdDialog.show(
 				$mdDialog.alert()
 					.clickOutsideToClose(true)
 					.title('Home page under construction.')
@@ -21,11 +22,12 @@ define([
 					.ariaLabel('Redirect prompt')
 					.ok('Got it!')
 			).finally(function () {
-				location.href='/projects/chatter';
+				$location.path('/projects/chatter');
 			});
 
 			$timeout(function () {
-				location.href='/projects/chatter';
+				$mdDialog.hide();
+				$location.path('/projects/chatter');
 			}, 3000)
 		}
 	];

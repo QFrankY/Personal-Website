@@ -22,3 +22,7 @@
 .innerNav {
 	z-index: 1 !important;
 }
+
+md-content #GraphSort {
+	background-color: #EEEEEE !important;
+}

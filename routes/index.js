@@ -3,6 +3,7 @@ const router  = require('express').Router();
 
 const dev        = require('./utils').Dev('router');
 const chatterApi = require('./chatter');
+const graphApi   = require('./graph');
 
 /* Sitewide routes */
 router.get('/', function(req, res, next) {
@@ -26,6 +27,8 @@ router.all('/projects/*', function(req, res, next) {
 
 /* Import Api */
 router.use('/api/chatter/', chatterApi);
+
+router.use('/api/graph/', graphApi);
 
 
 /** Catch all routes to fix refresh issue */

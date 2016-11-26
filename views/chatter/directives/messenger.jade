@@ -8,7 +8,8 @@ md-card
 					ng-disabled='loading', 
 					ng-model='model.input',
 					name='text',
-					md-maxlength='100')
+					md-maxlength='100',
+					md-select-on-focus)
 				div(ng-messages='model.text.$error')
 					div(ng-message="md-maxlength")
 						| Message too long!

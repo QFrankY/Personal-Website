@@ -31,12 +31,15 @@ define([
 				});
 
 				$routeProvider.when('/home', {
+					title       : 'Personal Website',
 					templateUrl : '/template/home',
 					controller  : 'HomeCtrl'
 				}).when('/projects/chatter', {
+					title       : 'Chatter',
 					templateUrl : '/template/chatter',
 					controller  : 'ChatterCtrl'
 				}).when('/projects/graphsort', {
+					title       : 'Graph Sort',
 					templateUrl : '/template/graph',
 					controller  : 'GraphCtrl'
 				}).otherwise({
