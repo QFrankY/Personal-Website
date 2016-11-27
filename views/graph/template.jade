@@ -11,22 +11,30 @@
 					span.md-headline Welcome to Graph Sort
 			md-card-content
 				p
-					| Click on a chat room on the left to join or create your own.
+					| Graph theory based entity resolution. Uses community detection to find similarities in strings.
 			md-card-actions(layout="row" layout-align="end center")
 				md-button.md-icon-button(ng-click='closeWelcomeMsg()')
 					md-icon(md-font-library='material-icons')
 						| close
 		md-card
-			//-md-progress-linear
-			md-card-content(layout='row')
+			md-card-title
+				md-card-title-text
+					span.md-headline Items to Sort
+			md-card-actions
+				md-button.md-primary.md-hue-5
+					| Example 1
+				md-button.md-primary.md-hue-5
+					| Example 2
+				md-button.md-primary.md-hue-5
+					| Example 3
+			md-card-content
 				form(layout='column', flex)
 					md-input-container
-						label Items to Sort
+						label Enter items in a comma delimited format with quotations...
 						textarea(rows='5')
-			md-card-actions(layout="row" layout-align="end center")
-				md-button.md-icon-button(ng-click='closeWelcomeMsg()')
-					md-icon(md-font-library='material-icons')
-						| close
+			md-card-actions(layout='row', layout-align='end')
+				md-button
+					| Sort
 	div(flex-gt-md='66', layout='row', flex)
 		md-card(flex)
 			//-md-progress-linear
