@@ -7,6 +7,7 @@ const chatterSockets = require('./chatter-socket').chatterSockets;
 const getRoomList    = require('./chatter-socket').getRoomList;
 const dev            = require('../utils').Dev('chatter:room');
 const getSocket      = require('../../socket').getSocket;
+const middleware     = require('./middleware');
 
 const Room = require('./mongo').Room;
 
@@ -21,7 +22,7 @@ router.get('/rooms', function (req, res) {
 });
 
 /** Join rooms */
-router.get('/join/:room/:id?', function (req, res) {
+router.get('/join/:room/:id?', middleware.validateSocket(), function (req, res) {
 	var socket  = getSocket(req, chatterSockets);
 	var room    = req.params.room;
 	var roomId  = req.params.id;
@@ -97,7 +98,7 @@ router.get('/join/:room/:id?', function (req, res) {
 });
 
 /** Leave room */
-router.get('/leave/:room/:id', function (req, res) {
+router.get('/leave/:room/:id', middleware.validateSocket(), function (req, res) {
 	var socket = getSocket(req, chatterSockets);
 	var room;
 
@@ -167,7 +168,7 @@ router.get('/room/users/:room', function (req, res) {
 });
 
 /** Rejoin all rooms on reconnect */
-router.post('/room/reconnect', function (req, res) {
+router.post('/room/reconnect', middleware.validateSocket(), function (req, res) {
 	var socket = getSocket(req, chatterSockets);
 	var rooms = req.body.rooms;
 

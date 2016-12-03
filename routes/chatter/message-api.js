@@ -1,11 +1,12 @@
 const router = require('express').Router();
 
-const chatter = require('./chatter-socket').chatter;
-const dev     = require('../utils').Dev('chatter:message');
+const chatter    = require('./chatter-socket').chatter;
+const dev        = require('../utils').Dev('chatter:message');
+const middleware = require('./middleware');
 
 const Message = require('./mysql').Message;
 
-router.post('/message', function (req, res) {
+router.post('/message', middleware.validateSocket(), function (req, res) {
 	var room     = req.body.room;
 	var roomId   = req.body.roomId;
 	var text     = req.body.text;

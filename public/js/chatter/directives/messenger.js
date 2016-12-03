@@ -26,7 +26,12 @@ define(function () {
 							chatterSvc.postMessage(model.input, tab.name, tab.id).then(function () {
 								model.input   = null;
 								scope.loading = false;
-								 $timeout(function() {
+								$timeout(function() {
+									messenger.focus(); 
+								});
+							}, function () {
+								scope.loading = false;
+								$timeout(function() {
 									messenger.focus(); 
 								});
 							});
