@@ -55,7 +55,7 @@ define([
 						icon  : 'chat_bubble'
 					},
 					{
-						link  : '/projects/graphsort',
+						link  : '/projects/graph-sort',
 						title : 'Graph Sort',
 						icon  : 'timeline'
 					}

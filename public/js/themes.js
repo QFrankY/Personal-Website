@@ -43,8 +43,8 @@ define([
 
 			// Graph Sort Theme
 			$mdThemingProvider.theme('graphsort')
-				.primaryPalette('blue-grey')
-				.accentPalette('pink')
+				.primaryPalette('cyan')
+				.accentPalette('blue-grey')
 				.warnPalette('red')
 				.backgroundPalette('customGrey', {
 					'hue-1' : '50'

@@ -5,13 +5,14 @@
 	//- Main content
 	div(flex-gt-md='33')
 		md-card(flex-gt-md='66',
-			md-colors="::{backgroundColor: 'primary-700'}")
+			ng-if='welcomeMsgOpen',
+			md-colors="::{backgroundColor: 'accent-700'}")
 			md-card-title
 				md-card-title-text
 					span.md-headline Welcome to Graph Sort
 			md-card-content
 				p
-					| Graph theory based entity resolution. Uses community detection to find similarities in strings.
+					| Graph theory based entity resolution. Uses community detection sort strings.
 			md-card-actions(layout="row" layout-align="end center")
 				md-button.md-icon-button(ng-click='closeWelcomeMsg()')
 					md-icon(md-font-library='material-icons')
@@ -20,22 +21,25 @@
 			md-card-title
 				md-card-title-text
 					span.md-headline Items to Sort
-			md-card-actions
-				md-button.md-primary.md-hue-5
-					| Example 1
-				md-button.md-primary.md-hue-5
-					| Example 2
-				md-button.md-primary.md-hue-5
-					| Example 3
 			md-card-content
 				form(layout='column', flex)
 					md-input-container
 						label Enter items in a comma delimited format with quotations...
 						textarea(rows='5')
 			md-card-actions(layout='row', layout-align='end')
-				md-button
+				md-button.md-primary.md-hue-5
+					| Example 1
+				md-button.md-primary.md-hue-5
+					| Example 2
+				md-button.md-primary.md-hue-5
+					| Example 3
+				md-button(md-colors="::{backgroundColor: 'accent-700'}",
+					ng-click='sort()')
 					| Sort
 	div(flex-gt-md='66', layout='row', flex)
 		md-card(flex)
 			//-md-progress-linear
+			md-card-title
+					md-card-title-text
+						span.md-headline Results
 			md-card-content#GraphOutput(layout='row')

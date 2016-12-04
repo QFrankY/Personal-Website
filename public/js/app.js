@@ -38,7 +38,7 @@ define([
 					title       : 'Chatter',
 					templateUrl : '/template/chatter',
 					controller  : 'ChatterCtrl'
-				}).when('/projects/graphsort', {
+				}).when('/projects/graph-sort', {
 					title       : 'Graph Sort',
 					templateUrl : '/template/graph',
 					controller  : 'GraphCtrl'
