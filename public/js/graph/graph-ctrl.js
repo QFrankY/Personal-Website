@@ -21,12 +21,6 @@ define([
 				$scope.welcomeMsgOpen = false;
 			};
 
-			$scope.sort = function () {
-				$http.post('/api/graph/sort').then(function () {
-					console.log('success')
-				});
-			}
-
 			// d3.select("#GraphOutput")
 			// 	.selectAll("p")
 			// 	.data([4, 8, 15, 16, 23, 42])
