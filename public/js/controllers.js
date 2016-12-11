@@ -12,7 +12,7 @@ define([
 
 	// Controller resources
 	'services/index',
-	'directives/index'
+	'./directives'
 ], function (ng, HomeCtrl, ChatterCtrl, GraphCtrl) {
 	'use strict';
 
@@ -53,12 +53,17 @@ define([
 						link  : '/projects/chatter',
 						title : 'Chatter',
 						icon  : 'chat_bubble'
-					}
+					},
 					// {
 					// 	link  : '/projects/graph-sort',
 					// 	title : 'Graph Sort',
 					// 	icon  : 'timeline'
 					// },
+					{
+						link  : '/projects/wiki-search',
+						title : 'Wiki Search',
+						icon  : 'search'
+					}
 				],
 
 				additional: [

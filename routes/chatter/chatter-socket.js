@@ -3,7 +3,7 @@ const md5    = require('crypto-js/md5');
 const chatter = require('../../socket').io.of('/chatter');
 const dev     = require('../utils').Dev('chatter:sockets');
 
-const Room = require('./mongo').Room;
+const Room = require('./mongo/room');
 
 // Socket Utilities
 var chatterSockets = {};

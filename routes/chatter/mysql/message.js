@@ -40,7 +40,7 @@ const Message = mysql.define('message', {
 	}
 }, {
 	/** Options */
-	tableName  : 'messages',
+	tableName  : 'chatter_messages',
 	timestamps : true,
 	updatedAt  : false,
 

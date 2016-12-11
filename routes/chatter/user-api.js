@@ -3,7 +3,7 @@ const md5    = require('crypto-js/md5');
 
 const dev = require('../utils').Dev('chatter:user');
 
-const Room = require('./mongo').Room;
+const Room = require('./mongo/room');
 
 /**
  * User Related APIs

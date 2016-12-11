@@ -4,7 +4,7 @@ const chatter    = require('./chatter-socket').chatter;
 const dev        = require('../utils').Dev('chatter:message');
 const middleware = require('./middleware');
 
-const Message = require('./mysql').Message;
+const Message = require('./mysql/message');
 
 router.post('/message', middleware.validateSocket(), function (req, res) {
 	var room     = req.body.room;

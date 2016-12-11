@@ -1,5 +1,5 @@
 /**
- * @fileOverview Main controller for Chatter project
+ * @fileOverview Controller for Chatter project
  */
 define([
 	'angular'

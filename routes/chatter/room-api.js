@@ -9,7 +9,7 @@ const dev            = require('../utils').Dev('chatter:room');
 const getSocket      = require('../../socket').getSocket;
 const middleware     = require('./middleware');
 
-const Room = require('./mongo').Room;
+const Room = require('./mongo/room');
 
 /**
  * Room related APIs
