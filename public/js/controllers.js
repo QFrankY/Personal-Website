@@ -53,12 +53,12 @@ define([
 						link  : '/projects/chatter',
 						title : 'Chatter',
 						icon  : 'chat_bubble'
-					},
-					{
-						link  : '/projects/graph-sort',
-						title : 'Graph Sort',
-						icon  : 'timeline'
 					}
+					// {
+					// 	link  : '/projects/graph-sort',
+					// 	title : 'Graph Sort',
+					// 	icon  : 'timeline'
+					// },
 				],
 
 				additional: [
