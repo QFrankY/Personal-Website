@@ -1,0 +1,32 @@
+.grey-background(layout='row',
+	flex)
+	md-sidenav.md-sidenav-left(md-component-id='chatterSide',
+		md-is-locked-open='true')
+		md-toolbar.md-hue-3.md-whiteframe-z1
+			h1.md-toolbar-tools
+				| Portfolio
+	div(flex,
+		flex-gt-sm='60',
+		flex-offset-gt-sm='5',
+		flex-gt-md='40',
+		flex-offset-gt-md='15',
+		flex-gt-lg='30',
+		flex-offset-gt-lg='20')
+		md-card(ng-repeat='project in projects')
+			md-card-title
+				md-card-title-text
+					span.md-headline {{ project.name }}
+			img.md-card-image(ng-src='{{project.links}}', alt='Washed Out')
+			md-card-content
+				p {{ project.description }}
+		//- md-card
+		//- 	md-card-title
+		//- 		md-card-title-text
+		//- 			span.md-headline Welcome to Graph Sort
+		//- 	md-card-content
+		//- 		p
+		//- 			| Graph theory based entity resolution. Uses community detection sort strings.
+		//- 	md-card-actions(layout="row" layout-align="end center")
+		//- 		md-button.md-icon-button(ng-click='closeWelcomeMsg()')
+		//- 			md-icon(md-font-library='material-icons')
+		//- 				| close
