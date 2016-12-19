@@ -67,6 +67,6 @@
 					span.md-headline {{ update.title }}
 			.videoWrapper(ng-if='update.type === "video"',
 				ng-bind-html='update.link')
-			img.md-card-image(ng-if='update.type === "image"',
+			img.md-card-image(ng-if='update.type === "picture"',
 				ng-src='{{ update.link }}')
 			md-card-content(ng-bind-html='update.content')
