@@ -51,7 +51,7 @@ define([
 							var tab = model.tabs[scope.selectedTabIndex];
 
 							chatterSvc.leaveRoom(tab.name, tab.id).then(function () {
-								model.tabs.splice(scope.selectedTab, 1);
+								model.tabs.splice(scope.selectedTabIndex, 1);
 
 								if (model.tabs.length === 0) {
 									model.resetSidebar();
