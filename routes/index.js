@@ -2,6 +2,7 @@ const path    = require('path');
 const router  = require('express').Router();
 
 const dev        = require('./utils').Dev('router');
+const homeApi    = require('./home');
 const chatterApi = require('./chatter');
 const graphApi   = require('./graph');
 
@@ -24,12 +25,10 @@ router.all('/projects/*', function(req, res, next) {
 	res.render('index');
 });
 
-
 /* Import Api */
+router.use('/api/home', homeApi);
 router.use('/api/chatter/', chatterApi);
-
 router.use('/api/graph/', graphApi);
-
 
 /** Catch all routes to fix refresh issue */
 router.all('*', function(req, res, next) {

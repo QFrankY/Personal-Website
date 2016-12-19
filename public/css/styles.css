@@ -6,14 +6,6 @@
 	padding: 0 8px;
 }
 
-#sidebar md-list-item .md-button {
-	margin: 0 !important;
-}
-
-.no-margin {
-	margin: 0 !important;
-}
-
 #sitehead {
 	margin: 20px;
 	margin-top: 60px;
@@ -23,6 +15,25 @@
 	z-index: 1 !important;
 }
 
-md-content #GraphSort {
+#main-content {
 	background-color: #EEEEEE !important;
+}
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Home page */
+#home md-grid-tile {
+	background-size: contain;
 }

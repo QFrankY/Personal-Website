@@ -1,5 +1,5 @@
 /**
- * Socket service
+ * Error handling service
  */
 
 define(function () {

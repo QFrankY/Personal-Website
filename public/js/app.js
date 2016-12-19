@@ -22,8 +22,8 @@ define([
 	]);
 
 	/** Angular Material Set up*/
-	app.config(['$locationProvider', '$logProvider', '$routeProvider',
-			function ($locationProvider, $logProvider, $routeProvider) {
+	app.config(['$httpProvider', '$locationProvider', '$logProvider', '$routeProvider',
+			function ($httpProvider, $locationProvider, $logProvider, $routeProvider) {
 				/** Setting html5 */
 				$locationProvider.html5Mode({
 					enabled     : true,
@@ -42,11 +42,17 @@ define([
 					title       : 'Graph Sort',
 					templateUrl : '/template/graph',
 					controller  : 'GraphCtrl'
+				}).when('/projects/wiki-search', {
+					title       : 'Wiki Search',
+					templateUrl : '/template/wiki',
+					controller  : 'WikiCtrl'
 				}).otherwise({
 					redirectTo: '/home'
 				});
 
 				$logProvider.debugEnabled(options.debugEnabled);
+
+				$httpProvider.interceptors.push('httpIntercept');
 			}])
 		.config(themes); // Importing themes
 

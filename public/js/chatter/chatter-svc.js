@@ -77,7 +77,7 @@ define(function () {
 				var deferred = $q.defer();
 
 				$http.post('/api/chatter/user', {
-					name : name
+					name: name
 				}).then(function (res) {
 					var user   = res.data.user;
 					user.image = formatImageUrl(user.imageNum);
@@ -94,6 +94,10 @@ define(function () {
 					text   : text,
 					room   : room,
 					roomId : id
+				}, {
+					headers: {
+						hideLoading: true
+					}
 				}).then(function (res) {
 					deferred.resolve(res.data.user);
 				}, errorSvc.promptHandler(deferred));

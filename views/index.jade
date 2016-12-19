@@ -58,7 +58,7 @@ html(lang='en')
 							| {{item.title}}
 
 		//- Main Page
-		div.relative(layout='column',layout-fill, roll='main')
+		div(layout='column',layout-fill, roll='main')
 
 			//- Toolbar
 			md-toolbar.md-hue-1#banner(layout='row',
@@ -79,9 +79,10 @@ html(lang='en')
 							| code
 						md-tooltip
 							| Source Code
+			md-progress-linear(ng-if='loading')
 
 			//- Main content
-			md-content(ng-view, layout='row', flex)
+			md-content#main-content(ng-view, layout='row', flex)
 
 		//- Loading JS files
 		script(src='/js/lib/require.js', data-main='/js/config')
