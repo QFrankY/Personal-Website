@@ -39,18 +39,12 @@ define([
 						link  : '/',
 						title : 'Home',
 						icon  : 'home'
-					},
-					{
-						link  : '/home/portfolio',
-						title : 'Portfolio',
-						icon  : 'dashboard',
-						hide  : true
 					}
 				],
 
 				projects : [
 					{
-						link  : '/projects/chatter',
+						link  : '/chatter',
 						title : 'Chatter',
 						icon  : 'chat_bubble'
 					}

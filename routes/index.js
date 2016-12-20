@@ -21,10 +21,6 @@ router.get('/directive/:folder/:name', function(req, res, next) {
 	res.render(directive);
 });
 
-router.all('/projects/*', function(req, res, next) {
-	res.render('index');
-});
-
 /* Import Api */
 router.use('/api/home', homeApi);
 router.use('/api/chatter/', chatterApi);

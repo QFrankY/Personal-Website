@@ -34,18 +34,10 @@ define([
 					title       : 'Personal Website',
 					templateUrl : '/template/home',
 					controller  : 'HomeCtrl'
-				}).when('/projects/chatter', {
+				}).when('/chatter', {
 					title       : 'Chatter',
 					templateUrl : '/template/chatter',
 					controller  : 'ChatterCtrl'
-				}).when('/projects/graph-sort', {
-					title       : 'Graph Sort',
-					templateUrl : '/template/graph',
-					controller  : 'GraphCtrl'
-				}).when('/projects/wiki-search', {
-					title       : 'Wiki Search',
-					templateUrl : '/template/wiki',
-					controller  : 'WikiCtrl'
 				}).otherwise({
 					redirectTo: '/home'
 				});
