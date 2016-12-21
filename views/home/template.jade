@@ -52,7 +52,7 @@
 				flex)
 				md-grid-tile.tile(ng-repeat='project in projects',
 					ng-click='showProjectUpdates(project)',
-					style='background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("{{ project.links }}");')
+					style='background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("{{ project.links }}"); cursor: pointer;')
 					md-grid-tile-footer.tile-footer
 						h3 {{ project.name }}
 
