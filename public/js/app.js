@@ -30,7 +30,7 @@ define([
 					requireBase : false
 				});
 
-				$routeProvider.when('/home', {
+				$routeProvider.when('/', {
 					title       : 'Personal Website',
 					templateUrl : '/template/home',
 					controller  : 'HomeCtrl'
@@ -39,7 +39,7 @@ define([
 					templateUrl : '/template/chatter',
 					controller  : 'ChatterCtrl'
 				}).otherwise({
-					redirectTo: '/home'
+					redirectTo: '/'
 				});
 
 				$logProvider.debugEnabled(options.debugEnabled);
