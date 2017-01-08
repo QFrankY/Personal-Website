@@ -23,9 +23,7 @@ define([
 
 			$mdThemingProvider.theme('default')
 				.primaryPalette('customBlue', {
-					'hue-3'   : '800',
-					'hue-2'   : '100',
-					'hue-1'		: '50'
+					'hue-1'	: '50'
 				})
 				.accentPalette('pink')
 				.warnPalette('red')

@@ -16,7 +16,7 @@ html(lang='en')
 		//- Sidebar
 		md-sidenav.md-sidenav-left.md-whiteframe-z2#sidebar(layout='column',
 			md-component-id='left')
-			md-toolbar.md-tall.md-hue-3.md-whiteframe-z1
+			md-toolbar.md-tall.md-whiteframe-z1(md-colors="::{backgroundColor: 'primary-800'}")
 				#sitehead
 					.md-title
 						| Frank Yu
@@ -61,8 +61,9 @@ html(lang='en')
 		div(layout='column',layout-fill, roll='main')
 
 			//- Toolbar
-			md-toolbar.md-hue-1#banner(layout='row',
-				md-whiteframe='1')
+			md-toolbar#banner(layout='row',
+				md-whiteframe='1',
+				md-colors="::{backgroundColor: 'background-50'}")
 				.md-toolbar-tools
 					md-button.md-icon-button.md-ink-ripple(ng-click='toggleLeftMenu()',
 						aria-label='Menu')
