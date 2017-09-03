@@ -11,7 +11,7 @@ define(function () {
 		'errorSvc',
 		function ($http, $q, errorSvc) {
 			const formatImageUrl = function(imageNum) {
-				return "https://s3-us-west-2.amazonaws.com/frankyu/chatter/profile/img" + imageNum + '.png';
+				return "https://s3-us-west-2.amazonaws.com/frank-yu/chatter/profile/img" + imageNum + '.png';
 			};
 
 			const getRooms = function () {

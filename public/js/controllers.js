@@ -8,12 +8,11 @@ define([
 	// Importing other controllers
 	'home/home-ctrl',
 	'chatter/chatter-ctrl',
-	'graph/graph-ctrl',	
 
 	// Controller resources
 	'services/index',
 	'./directives'
-], function (ng, HomeCtrl, ChatterCtrl, GraphCtrl) {
+], function (ng, HomeCtrl, ChatterCtrl) {
 	'use strict';
 
 	var MainCtrl = [
@@ -69,6 +68,5 @@ define([
 	return ng.module('allControllers', ['directives', 'services'])
 		.controller('HomeCtrl', HomeCtrl)
 		.controller('ChatterCtrl', ChatterCtrl)
-		.controller('GraphCtrl', GraphCtrl)
 		.controller('MainCtrl', MainCtrl);
 });
