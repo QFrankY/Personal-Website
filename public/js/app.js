@@ -34,6 +34,10 @@ define([
 					title       : 'Personal Website',
 					templateUrl : '/template/home',
 					controller  : 'HomeCtrl'
+				}).when('/project/:projectId', {
+					title       : 'Project Description',
+					templateUrl : '/template/home/project',
+					controller  : 'ProjectCtrl'
 				}).when('/chatter', {
 					title       : 'Chatter',
 					templateUrl : '/template/chatter',

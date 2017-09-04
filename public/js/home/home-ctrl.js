@@ -8,12 +8,15 @@ define([
 
 	return [
 		'$http',
+		'$location',
 		'$rootScope',
 		'$sce',
 		'$scope',
 		'homeSvc',
-		function ($http, $rootScope, $sce, $scope, homeSvc) {
+		function ($http, $location, $rootScope, $sce, $scope, homeSvc) {
 			$rootScope.siteBannerTitle = 'Home';
+			$rootScope.lockLeftMenu(true);
+
 			$scope.sorted = false;
 			var projects;
 
@@ -49,36 +52,8 @@ define([
 			};
 
 			$scope.showProjectUpdates = function (project) {
-				$scope.project = project;
-
-				homeSvc.getProjectUpdates(project.id).then(function (updates) {
-					for (var i = 0; i < updates.length; i++) {
-						updates[i].content =  $sce.trustAsHtml(updates[i].content);
-
-						if (updates[i].type === 'video') {
-							updates[i].link = $sce.trustAsHtml(updates[i].link);
-						}
-					}
-
-					$scope.updates = updates;
-				});
+				$location.url("/project/" + project.id);
 			};
-
-			// var dialog = $mdDialog.show(
-			// 	$mdDialog.alert()
-			// 		.clickOutsideToClose(true)
-			// 		.title('Home page under construction.')
-			// 		.textContent('Redirecting to latest completed project...')
-			// 		.ariaLabel('Redirect prompt')
-			// 		.ok('Got it!')
-			// ).finally(function () {
-			// 	$location.path('/projects/chatter');
-			// });
-
-			// $timeout(function () {
-			// 	$mdDialog.hide();
-			// 	$location.path('/projects/chatter');
-			// }, 3000)
 		}
 	];
 });

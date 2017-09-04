@@ -7,24 +7,46 @@ define([
 
 	// Importing other controllers
 	'home/home-ctrl',
+	'home/project-ctrl',
 	'chatter/chatter-ctrl',
 
 	// Controller resources
 	'services/index',
 	'./directives'
-], function (ng, HomeCtrl, ChatterCtrl) {
+], function (ng, HomeCtrl, ProjectCtrl, ChatterCtrl) {
 	'use strict';
 
 	var MainCtrl = [
+		'$mdMedia',
 		'$mdSidenav',
 		'$rootScope',
 		'$route',
 		'$scope',
-		function ($mdSidenav, $rootScope, $route, $scope) {
+		'$timeout',
+		function ($mdMedia, $mdSidenav, $rootScope, $route, $scope, $timeout) {
 			$rootScope.siteBannerTitle = 'Home';
 
+			$rootScope.lockLeftMenu = function (value) {
+				$scope.leftMenuLockedOpen = value; 
+				var sidenav = document.getElementById("sidebar");
+				if (value) {
+					if (!sidenav.classList.contains("md-locked-open")) {
+						sidenav.classList.add("md-locked-open");
+					}
+				} else {
+					sidenav.classList.remove("md-locked-open");
+					$mdSidenav('left').close();
+				}
+			}
+
+			$scope.$watch(function() { return $mdMedia('gt-sm') }, function(value) {
+				$rootScope.lockLeftMenu(value);
+			});
+
 			$scope.toggleLeftMenu = function() {
-				$mdSidenav('left').toggle();
+				if (!$scope.leftMenuLockedOpen) {
+					$mdSidenav('left').toggle();
+				}
 			};
 
 			$rootScope.$on("$routeChangeSuccess", function(currentRoute, previousRoute){
@@ -67,6 +89,7 @@ define([
 
 	return ng.module('allControllers', ['directives', 'services'])
 		.controller('HomeCtrl', HomeCtrl)
+		.controller('ProjectCtrl', ProjectCtrl)
 		.controller('ChatterCtrl', ChatterCtrl)
 		.controller('MainCtrl', MainCtrl);
 });

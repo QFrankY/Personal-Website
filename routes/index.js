@@ -10,8 +10,10 @@ router.get('/', function(req, res, next) {
 	res.render('index');
 });
 
-router.get('/template/:name', function(req, res, next) {
-	var template = path.join(req.params.name,'template.jade');
+router.get('/template/:feature/:name?', function(req, res, next) {
+	var name = req.params.name ? req.params.name + ".jade" : "template.jade"; 
+	
+	var template = path.join(req.params.feature, name);
 	res.render(template);
 });
 

@@ -1,0 +1,13 @@
+//- Project Updates
+div(flex,
+    flex-gt-md='60',
+    flex-gt-lg='50')
+    md-card(ng-repeat = 'update in updates')
+        md-card-title
+            md-card-title-text
+                span.md-headline {{ update.title }}
+        .videoWrapper(ng-if='update.type === "video"',
+            ng-bind-html='update.link')
+        img.md-card-image(ng-if='update.type === "picture"',
+            ng-src='{{ update.link }}')
+        md-card-content(ng-bind-html='update.content')

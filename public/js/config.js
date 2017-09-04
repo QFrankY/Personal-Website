@@ -12,38 +12,38 @@ require.config({
 	paths: {
 		/** Angular */
 		'angular': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min',
 			'lib/angular/angular.min'
 		],
 
 		'angular-resource': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-resource.min',
 			'lib/angular-resource/angular-resource.min'
 		],
 		
 		'angular-route': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.min',
 			'lib/angular-route/angular-route.min'
 		],
 
 		/** Angular Material */
 		'angular-aria': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min',
 			'lib/angular-aria/angular-aria.min'
 		],
 
 		'angular-animate': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min',
 			'lib/angular-animate/angular-animate.min'
 		],
 
 		'angular-messages': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min',
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min',
 			'lib/angular-messages/angular-messages.min'
 		],
 
 		'angular-material': [
-			'//ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min',
+			'//ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min',
 			'lib/angular-material/angular-material.min'
 		],
 

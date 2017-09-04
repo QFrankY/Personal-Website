@@ -1,36 +1,36 @@
 #home(layout='row', flex)
-	md-sidenav.md-sidenav-left.md-margin.innerNav(md-is-locked-open='true')
-		md-toolbar.md-tall(md-colors="::{backgroundColor: 'background-700'}")
-			#sitehead
-				.md-title(ng-if='!project')
-					| Project Tags
-				.md-title(ng-if='project')
-					| {{ project.name }}
+	//- md-sidenav.md-sidenav-left.md-margin.innerNav(md-is-locked-open='true')
+	//- 	md-toolbar.md-tall(md-colors="::{backgroundColor: 'background-700'}")
+	//- 		#sitehead
+	//- 			.md-title(ng-if='!project')
+	//- 				| Project Tags
+	//- 			.md-title(ng-if='project')
+	//- 				| {{ project.name }}
 
-		div(ng-if='!project',
-			layout='column',
-			flex)
-			md-list(flex)
-				md-list-item(ng-repeat='tag in tags',
-					ng-click='sortProjects(tag.name)')
-					| {{ tag.name }} ({{ tag.count }})
-			md-button(ng-if='sorted',
-				ng-click='showAllProjects()')
-				| Show All
+	//- 	div(ng-if='!project',
+	//- 		layout='column',
+	//- 		flex)
+	//- 		md-list(flex)
+	//- 			md-list-item(ng-repeat='tag in tags',
+	//- 				ng-click='sortProjects(tag.name)')
+	//- 				| {{ tag.name }} ({{ tag.count }})
+	//- 		md-button(ng-if='sorted',
+	//- 			ng-click='showAllProjects()')
+	//- 			| Show All
 
-		div(ng-if='project',
-			layout='column',
-			flex)
-			img(ng-src="{{ project.links }}", style='width:100%; height:auto; margin-top: 10px')
-			md-list(flex)
-				md-subheader Description
-				md-list-item
-					| {{ project.description }}
-			md-button(ng-click='showAllProjects()')
-				| Back to projects
+	//- 	div(ng-if='project',
+	//- 		layout='column',
+	//- 		flex)
+	//- 		img(ng-src="{{ project.links }}", style='width:100%; height:auto; margin-top: 10px')
+	//- 		md-list(flex)
+	//- 			md-subheader Description
+	//- 			md-list-item
+	//- 				| {{ project.description }}
+	//- 		md-button(ng-click='showAllProjects()')
+	//- 			| Back to projects
 
 	//- Gallery of all projects
-	div(flex, ng-if='!project')
+	div(flex)
 		md-card(md-colors="::{backgroundColor: 'background-700'}",
 			ng-if='welcomeMsgOpen')
 			md-card-title
@@ -55,18 +55,3 @@
 					style='background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("{{ project.links }}"); cursor: pointer;')
 					md-grid-tile-footer.tile-footer
 						h3 {{ project.name }}
-
-	//- Project Updates
-	div(ng-if='project',
-		flex,
-		flex-gt-md='60',
-		flex-gt-lg='50')
-		md-card(ng-repeat = 'update in updates')
-			md-card-title
-				md-card-title-text
-					span.md-headline {{ update.title }}
-			.videoWrapper(ng-if='update.type === "video"',
-				ng-bind-html='update.link')
-			img.md-card-image(ng-if='update.type === "picture"',
-				ng-src='{{ update.link }}')
-			md-card-content(ng-bind-html='update.content')

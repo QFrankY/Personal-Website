@@ -25,7 +25,7 @@ define(function () {
 				var deferred = $q.defer();
 
 				$http.get('/api/home/updates/' + projectID).then(function (res) {
-					deferred.resolve(res.data.updates);
+					deferred.resolve(res.data);
 				}, errorSvc.promptHandler(deferred));
 
 				return deferred.promise;

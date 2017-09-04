@@ -14,48 +14,7 @@ html(lang='en')
 
 	body(ng-controller='MainCtrl', layout='row', ng-cloak)
 		//- Sidebar
-		md-sidenav.md-sidenav-left.md-whiteframe-z2#sidebar(layout='column',
-			md-component-id='left')
-			md-toolbar.md-tall.md-whiteframe-z1(md-colors="::{backgroundColor: 'primary-800'}")
-				#sitehead
-					.md-title
-						| Frank Yu
-					.md-subhead
-						| Personal Website
-			md-list.md-dense(flex)
-				md-list-item(ng-repeat='item in sideBar.menu',
-					ng-if="!item.hide",
-					ng-click='toggleLeftMenu()',
-					href='{{item.link}}')
-					md-item-content(md-ink-ripple, layout='row', layout-align='start center')
-						.inset
-							md-icon(md-font-library='material-icons')
-								| {{item.icon}}
-						.inset
-							| {{item.title}}
-				md-subheader Projects
-				md-list-item(ng-repeat='item in sideBar.projects',
-					ng-if="!item.hide",
-					ng-click='toggleLeftMenu()',
-					href='{{item.link}}')
-					md-item-content(md-ink-ripple, layout='row', layout-align='start center')
-						.inset
-							md-icon(md-font-library='material-icons')
-								| {{item.icon}}
-						.inset
-							| {{item.title}}
-				md-subheader Additional Links
-				md-list-item(ng-repeat='item in sideBar.additional',
-					ng-if="!item.hide",
-					ng-click='toggleLeftMenu()',
-					href='{{item.link}}',
-					target='_blank')
-					md-item-content(md-ink-ripple, layout='row', layout-align='start center')
-						.inset
-							md-icon(md-font-library='material-icons')
-								| {{item.icon}}
-						.inset
-							| {{item.title}}
+		include sidebar
 
 		//- Main Page
 		div(layout='column',layout-fill, roll='main')
@@ -66,6 +25,7 @@ html(lang='en')
 				md-colors="::{backgroundColor: 'background-50'}")
 				.md-toolbar-tools
 					md-button.md-icon-button.md-ink-ripple(ng-click='toggleLeftMenu()',
+						ng-if='!leftMenuLockedOpen',
 						aria-label='Menu')
 						md-icon(md-font-library='material-icons')
 							| menu

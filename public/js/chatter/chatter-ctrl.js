@@ -18,6 +18,7 @@ define([
 		'socketSvc',
 		function ($http, $log, $mdDialog, $q, $rootScope, $scope, chatterSvc, errorSvc, socketSvc) {
 			$rootScope.siteBannerTitle = 'Projects / Chatter';
+			$rootScope.lockLeftMenu(false);
 
 			/** SCOPE VARIABLES */
 			$scope.welcomeMsgOpen = true;
