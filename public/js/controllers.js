@@ -26,25 +26,43 @@ define([
 		function ($mdMedia, $mdSidenav, $rootScope, $route, $scope, $timeout) {
 			$rootScope.siteBannerTitle = 'Home';
 
-			$rootScope.lockLeftMenu = function (value) {
-				$scope.leftMenuLockedOpen = value; 
+			var lockLeftMenuOpen = function () {
 				var sidenav = document.getElementById("sidebar");
-				if (value) {
-					if (!sidenav.classList.contains("md-locked-open")) {
-						sidenav.classList.add("md-locked-open");
-					}
+				
+				if (!sidenav.classList.contains("md-locked-open")) {
+					sidenav.classList.add("md-locked-open");
+				}
+
+				$scope.showMenuToggle = false;
+			}
+
+			var unlockLeftMenu = function () {
+				var sidenav = document.getElementById("sidebar");
+
+				sidenav.classList.remove("md-locked-open");
+				$mdSidenav('left').close();
+				$scope.showMenuToggle = true;
+			}
+
+			$rootScope.lockLeftMenu = function (value) {
+				$scope.leftMenuLockedOpen = value;
+				if (value && $mdMedia('gt-sm')) {
+					lockLeftMenuOpen();
 				} else {
-					sidenav.classList.remove("md-locked-open");
-					$mdSidenav('left').close();
+					unlockLeftMenu();
 				}
 			}
 
 			$scope.$watch(function() { return $mdMedia('gt-sm') }, function(value) {
-				$rootScope.lockLeftMenu(value);
+				if (value && $scope.leftMenuLockedOpen) {
+					lockLeftMenuOpen();
+				} else {
+					unlockLeftMenu();
+				}
 			});
 
 			$scope.toggleLeftMenu = function() {
-				if (!$scope.leftMenuLockedOpen) {
+				if ($scope.showMenuToggle) {
 					$mdSidenav('left').toggle();
 				}
 			};

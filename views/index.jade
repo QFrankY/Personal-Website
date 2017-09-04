@@ -25,7 +25,7 @@ html(lang='en')
 				md-colors="::{backgroundColor: 'background-50'}")
 				.md-toolbar-tools
 					md-button.md-icon-button.md-ink-ripple(ng-click='toggleLeftMenu()',
-						ng-if='!leftMenuLockedOpen',
+						ng-if='showMenuToggle',
 						aria-label='Menu')
 						md-icon(md-font-library='material-icons')
 							| menu
