@@ -19,7 +19,7 @@ define([
 
             homeSvc.getProjectUpdates(projectId).then(function (data) {
                 $scope.project = data.project;
-                $rootScope.siteBannerTitle = "Project / " + $scope.project.name
+                $rootScope.siteBannerTitle = "Project Updates / " + $scope.project.name
                 
                 var updates = data.updates;
                 for (var i = 0; i < updates.length; i++) {
