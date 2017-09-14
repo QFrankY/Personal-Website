@@ -6,6 +6,7 @@
     "start": "nodemon --ignore public ./bin/www"
   },
   "dependencies": {
+    "aws-sdk": "^2.115.0",
     "bluebird": "^3.4.6",
     "body-parser": "~1.15.1",
     "colors": "^1.1.2",

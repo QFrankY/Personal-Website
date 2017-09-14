@@ -96,6 +96,11 @@ define([
 						icon  : 'code'
 					},
 					{
+						link  : '/resume',
+						title : 'Resume',
+						icon  : 'description'
+					},
+					{
 						link  : 'https://ca.linkedin.com/in/qfranky',
 						title : 'LinkedIn',
 						icon  : 'person'
