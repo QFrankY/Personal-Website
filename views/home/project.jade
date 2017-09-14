@@ -2,7 +2,7 @@
 div(flex,
     flex-gt-md='60',
     flex-gt-lg='50')
-    md-card(ng-repeat = 'update in updates')
+    md-card(ng-if='updates && updates.length > 0', ng-repeat = 'update in updates')
         md-card-title
             md-card-title-text
                 span.md-headline {{ update.title }}
@@ -11,3 +11,10 @@ div(flex,
         img.md-card-image(ng-if='update.type === "picture"',
             ng-src='{{ update.link }}')
         md-card-content(ng-bind-html='update.content')
+    md-card(ng-if='updates && updates.length == 0')
+        md-card-title
+            md-card-title-text
+                span.md-headline No Project Updates.
+        md-card-content
+            md-card-actions(layout='row', layout-align='center center')
+                md-button(href='/') Back to Projects

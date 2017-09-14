@@ -31,6 +31,9 @@ define([
                 }
 
                 $scope.updates = updates;
+            }).catch(function (err) {
+                $rootScope.siteBannerTitle = "Project not found!";
+                $scope.updates = [];
             });
 		}
 	];
