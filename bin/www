@@ -9,6 +9,8 @@ const dev    = require('../routes/utils').Dev('server');
 const routes = require('../routes');
 const server = require('../socket').server;
 
+process.title = process.env.PROCESS_TITLE;
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
