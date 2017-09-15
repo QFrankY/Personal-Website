@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "debug": "nodemon --ignore public ./bin/www",
-    "start": "git pull && npm install && node ./bin/www"
+    "start": "/usr/bin/git pull && /usr/bin/npm install && /usr/bin/nodejs ./bin/www"
   },
   "dependencies": {
     "aws-sdk": "^2.115.0",
