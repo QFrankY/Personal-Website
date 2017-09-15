@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --ignore public ./bin/www"
+    "debug": "nodemon --ignore public ./bin/www",
+    "start": "git pull && npm install && node ./bin/www"
   },
   "dependencies": {
     "aws-sdk": "^2.115.0",
