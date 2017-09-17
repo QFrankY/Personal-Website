@@ -43,7 +43,7 @@ require.config({
 		],
 
 		'angular-material': [
-			'//ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min',
+			'//ajax.googleapis.com/ajax/libs/angular_material/1.1.5/angular-material.min',
 			'lib/angular-material/angular-material.min'
 		],
 
